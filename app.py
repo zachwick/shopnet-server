@@ -60,7 +60,7 @@ urls = (
     '/sites/(\d+)',                     'SingleSite',
 
     # This API is for either GET-ting all sites, or POST-ing a new site only.
-    # '/sites/',                          'Sites',
+    '/sites/',                          'Sites',
 
     # This API endpoint is for interacting with a single datapoint identified by
     # the supplied id.

@@ -5,13 +5,13 @@
   <div id="map-container"></div>
   <div id="toolbar-container" class="<%= privilege == 2 ? 'four-wide' : 'three-wide' %>">
 	<span class="logout-button">&#9032;</span>
-	<span class="add-vehicle-button has-l-border has-r-border">Vehicle++</span>
+	<span class="add-site-button has-l-border has-r-border">Site++</span>
 	<% if (privilege == 2) { %>
 	  <span class="add-user-button has-l-border">User++</span>
 	<% } %>
 	  <span class="upload-datafile-button">Upload</span>
   </div>
-  <ul id="vehicle-list"></ul>
+  <ul id="site-list"></ul>
   <div id="add-user-modal" class="modal-wrapper">
 	<span class="add-user-header">Add User</span>
 	<span class="x-button">X</span>
@@ -21,22 +21,18 @@
 	  <input type="password" name="confirm" placeholder="Confirm Password:"/>
 	  <input type="email" name="email" placeholder="user@example.com"/>
 	  <select class="user-privilege-select">
-		<option value="1">Fleet Manager</option>
-		<option value="2">IOSiX Admin</option>
+		<option value="1">Manager</option>
+		<option value="2">Admin</option>
 	  </select>
 	  <input type="submit" value="Add User" class="add-user-submit"/>
 	</form>
   </div>
-  <div id="add-node-modal" class="modal-wrapper">
-	  <span class="add-vehicle-header">Add Vehicle</span>
+  <div id="add-site-modal" class="modal-wrapper">
+	  <span class="add-site-header">Add Site</span>
 	  <span class="x-button">X</span>
-	  <form id="add-vehicle-form">
-		<input type="text" name="year" placeholder="Year:"></input>
-		<input type="text" name="make" placeholder="Make:"></input>
-		<input type="text" name="model" placeholder="Model:"></input>
-		<input type="text" name="vin" placeholder="VIN:"></input>
-		<input type="text" name="odom" placeholder="Odometer:"></input>
-		<input type="submit" value="Add New Vehicle"></input>
+	  <form id="add-site-form">
+		<input type="text" name="name" placeholder="Example Name"></input>
+		<input type="submit" value="Add New Site"></input>
 	  </form>
   </div>
   <div id="upload-data-modal" class="modal-wrapper">
@@ -53,34 +49,27 @@
   </div>
 </script>
 
-<script type="text/template" id="select-vehicle-template">
-  <%= year + " " + MAKE[make] + " " + model %>
+<script type="text/template" id="select-site-template">
+  <%= name %>
 </script>
 
-<script type="text/template" id="vehicle-template">
-  <span class="vehicle-year"><%= year %></span>
-  <span class="vehicle-make"><%= MAKE[make] %></span>
-  <span class="vehicle-model"><%= model %></span>
-  <div class="vehicle-vin <%- display ? 'state-visible' :
-  'state-hidden' %>">VIN: <%= vin %></div>
-  <div class="vehicle-odom <%- display ? 'state-visible' :
-  'state-hidden' %>">Odom: <%= odom %></div>
-  <div class="vehicle-actions <%- display ? 'state-visible' : 'state-hidden' %>">
+<script type="text/template" id="site-template">
+  <span class="site-name"><%= name %></span>
+  <div class="site-actions <%- display ? 'state-visible' : 'state-hidden' %>">
 	<span class="delete">Delete</span>
 	<span class="edit">Edit</span>
   </div>
-  <ul class="vehicle-trips <%- display ? 'state-visible' :
+  <ul class="site-nodes <%- display ? 'state-visible' :
   'state-hidden' %>">
 
   </ul>
 </script>
 
-<script type="text/template" id="trip-template">
-  <span class="trip-display">
-	<input type="checkbox" name="trip-display">
+<script type="text/template" id="node-template">
+  <span class="node-display">
+	<input type="checkbox" name="node-display">
   </span>
-  <span class="trip-name"><%= start + " - " +
-  end %></span>
+  <span class="node-name"><%= id %></span>
 </script>
 
 <script type="text/template" id="datapoint-template">
@@ -109,9 +98,5 @@
   </div>
 </script>
 
-<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
- <link rel="stylesheet"
- href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-<script src="http://beta.mapquestapi.com/sdk/leaflet/v0.1/mq-map.js?key=Fmjtd%7Cluur21ubnd%2C75%3Do5-90t0q6"></script>
 <script src="/static/Dossier.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/bootstrap.css" />

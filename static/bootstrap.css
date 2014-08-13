@@ -1,4 +1,4 @@
-#vehicle-list li {
+#site-list li {
   list-style-type: none;
   border-bottom: 1px solid black;
   border-top: 1px solid black;
@@ -7,33 +7,19 @@
   padding: 0px;
   cursor: pointer;
 }
-#vehicle-list li.state-expanded {
+#site-list li.state-expanded {
   background: #b2f9fc;
 }
-#vehicle-list li.state-expanded .vehicle-year {
+#site-list li.state-expanded .site-name {
   text-align: left;
 }
-#vehicle-list li.state-expanded .vehicle-make {
-  text-align: left;
-}
-#vehicle-list li.state-expanded .vehicle-model {
-  text-align: left;
-}
-#vehicle-list li.state-expanded .vehicle-vin {
-  text-align: left;
-  margin-left: 5px;
-}
-#vehicle-list li.state-expanded .vehicle-odom {
-  text-align: left;
-  margin-left: 5px;
-}
-#vehicle-list li.state-expanded .vehicle-actions {
+#site-list li.state-expanded .site-actions {
   float: right;
   position: relative;
   right: 5px;
   top: -40px;
 }
-#vehicle-list li .vehicle-actions span {
+#site-list li .site-actions span {
   cursor: pointer;
   border: 1px solid black;
   border-collapse: collapse;
@@ -46,7 +32,7 @@
   text-align: center;
   width: auto;
 }
-#vehicle-list li .vehicle-trips {
+#site-list li .site-nodes {
   padding: 0px;
   border-collapse: collapse;
 }
@@ -85,7 +71,7 @@
 #app-container #toolbar-container span:hover {
   cursor: pointer;
 }
-#app-container #vehicle-list {
+#app-container #site-list {
   padding: 0px;
   margin: 0px;
   border: 1px solid black;
@@ -146,17 +132,17 @@
   width: auto;
   margin-top: 15px;
 }
-#app-container .modal-wrapper #add-vehicle-form {
+#app-container .modal-wrapper #add-site-form {
   position: relative;
   bottom: 0px;
   padding: 2px 0px;
   text-align: center;
 }
-#app-container .modal-wrapper #add-vehicle-form input {
+#app-container .modal-wrapper #add-site-form input {
   width: auto;
   margin-top: 3px;
 }
-#app-container .modal-wrapper #add-vehicle-form input[type="submit"] {
+#app-container .modal-wrapper #add-site-form input[type="submit"] {
   background: none;
   border: 1px solid black;
   width: auto;

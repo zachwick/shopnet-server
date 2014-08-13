@@ -23,7 +23,7 @@ var SiteView = Backbone.View.extend({
 	// NB: The toggleEditingState function is not implemented, so there is
 	//     currently no way to edit a site except via the database.
 	events: {
-		'click span:not(.delete):not(.edit):not(.trip-name):not(.trip-display)': 'toggleDisplaySite',
+		'click span:not(.delete):not(.edit):not(.not-name):not(.node-display)': 'toggleDisplaySite',
 		'click .delete': 'deleteSelf',
 		'click .edit': 'toggleEditingState'
 	},
@@ -97,17 +97,17 @@ var SiteView = Backbone.View.extend({
 	},
 
 	// This method creates a new NodeView for each Node model and puts the
-	// created DOM elements into the list of trips for this SiteView.
+	// created DOM elements into the list of nodes for this SiteView.
 	renderOneNode: function(node) {
 		var view = new NodeView({ model: node });
-		this.$(".site-trips").append(view.render().el);
+		this.$(".site-nodes").append(view.render().el);
 	},
 
 	// Create/Manipulate the DOM in order to create and display the SiteView
 	render: function() {
 		this.$el.html (this.template()(this.model.toJSON()));
 		this.$el.toggleClass('state-expanded',this.model.get("display"));
-		this.renderTrips();
+		this.renderNodes();
 		return this;
 	}
 });

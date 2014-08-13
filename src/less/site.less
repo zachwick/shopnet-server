@@ -1,4 +1,4 @@
-#vehicle-list {
+#site-list {
 	li {
 		list-style-type: none;
 		border-bottom: 1px solid black;
@@ -9,31 +9,17 @@
 		cursor: pointer;
 		&.state-expanded {
 			background: @color-lightaccentblue;
-			.vehicle-year {
+			.site-name {
 				text-align: left;
 			}
-			.vehicle-make {
-				text-align: left;
-			}
-			.vehicle-model {
-				text-align: left;
-			}
-			.vehicle-vin {
-				text-align: left;
-				margin-left: 5px;
-			}
-			.vehicle-odom {
-				text-align: left;
-				margin-left: 5px;
-			}
-			.vehicle-actions {
+			.site-actions {
 				float: right;
 				position: relative;
 				right: 5px;
 				top: -40px;
 			}
 		}
-		.vehicle-actions {
+		.site-actions {
 			span {
 				cursor: pointer;
 				border: 1px solid black;
@@ -54,7 +40,7 @@
 
 			}			
 		}
-		.vehicle-trips {
+		.site-nodes {
 			padding: 0px;
 			border-collapse: collapse;
 		}

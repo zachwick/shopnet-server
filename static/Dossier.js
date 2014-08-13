@@ -14343,7 +14343,8 @@ var Site = Backbone.RelationalModel.extend({
 	}],
 	defaults: {
 		// Name of the site
-		name: ""
+		name: "",
+		display: false
 	},
 	
 	// A URI fragment that corresponds to the REST API's URL for the Site data
@@ -14404,37 +14405,7 @@ var AppView = Backbone.View.extend({
 
 	// Define any UI events and the functions that are bound to them
 	events: {
-		'submit #add-vehicle-form': 'newVehicle',
-		'submit #add-user-form': 'newUser',
-		'click .logout-button': 'doLogout',
-		'click .add-node-button': 'showAddNodeModal',
-		'click .upload-datafile-button': 'showUploadDataModal',
-		'click .add-user-button': 'showAddUserModal',
-		'click .x-button': "closeModal"
-	},
-
-	showAddUserModal: function(e) {
-		this.$("#modal-background").show();
-		this.$("#add-user-modal").show();
-	},
-
-	closeModal: function(e) {
-		// Clear any input elements except submit buttons
-		this.$(".modal-wrapper:visible input:not([type='submit'])").val("");
-		// Hide the semi-opaque background
-		this.$("#modal-background").hide();
-		// Hide any visible modal-wrapper divs
-		this.$(".modal-wrapper:visible").hide();
-	},
-
-	showAddNodeModal: function(e) {
-		this.$("#modal-background").show();
-		this.$("#add-node-modal").show();
-	},
-
-	showUploadDataModal: function(e) {
-		this.$("#modal-background").show();
-		this.$("#upload-data-modal").show();
+		'click .logout-button': 'doLogout'
 	},
 
 	// This method directs the browser to '/logout' which logs out the user
@@ -14452,24 +14423,7 @@ var AppView = Backbone.View.extend({
 
 		this.user = new User();
 
-		// A reference to the OSM map view.
-		this.map = null;
-
-		// An object that has a property for each Datapoint model shown on
-		// the OSM map view. The key for each property is the Datapoint model's
-		// cid attribute, a unique identifier from the extension of
-		// Backbone.Model that is unique across all of the Backbone models that
-		// we use.
-		// NB: the cid is created at runtime, so don't use it for anything 
-		//     important.
-		this.mapMarkers = {};
-
-		// When we 'update' or 'change' our collection of vehicles, call the
-		// AppView.populateMap function. Look at the BackboneJS docs for more
-		// info.
-		this.listenTo(this.sites, 'update change', this.populateMap);
-
-		// When we 'add' or 'remove' from our collection of vehicles, call the
+		// When we 'add' or 'remove' from our collection of sites, call the
 		// AppView.render method. Look at the BackboneJS docs for more info.
 		this.listenTo(this.sites, 'add remove', this.render);
 
@@ -14490,28 +14444,19 @@ var AppView = Backbone.View.extend({
 		          "addOneSite",
 		          "addAllSites",
 		          "newSite",
-		          "render",
-		          "populateMap",
-		          "createMap",
-		          "drawMapMarker"
+		          "render"
 		         );
 	},
 
-	// Create a new VehicleView and add it to the displayed list of vehicles
-	// @param vehicle - A Vehicle model to create a view for.
+	// Create a new SiteView and add it to the displayed list of sites
+	// @param site - A Site model to create a view for.
 	addOneSite: function(site) {
 		var view = new SiteView({ model: site });
-		this.$("#vehicle-list").append(view.render().el);
-		// The SelectVehicleView was previously used in the upload form to
-		// select which vehicle the datafile belongs to. That info now comes
-		// from correctly parsing the VIN. To add it back, uncomment the two
-		// lines below and the select element in the index.html template
-		/*var selectView = new SelectVehicleView({ model: vehicle });
-		this.$(".upload-vehicle-select").append(selectView.render().el);*/
+		this.$("#site-list").append(view.render().el);
 	},
 
-	// Create a new VehicleView for each Vehicle model in our vehicles
-	// collection. We do this by calling AppView.addOneVehicle for each model.
+	// Create a new SiteView for each Site model in our sites
+	// collection. We do this by calling AppView.addOneSite for each model.
 	addAllSites: function() {
 		this.sites.each(this.addOneSite, this);
 	},
@@ -14529,104 +14474,40 @@ var AppView = Backbone.View.extend({
 			});
 			newUser.save();
 		}
-
-		this.closeModal();
 	},
 
-	// Add a new vehicle to the database
+	// Add a new site to the database
 	// @param e - the Event object that triggered AppView.newVehicle being
 	//            called.
 	newSite: function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 
-		// MAKE is defined in bootstap.js
-		var parsedMake = MAKE.indexOf (this.$("input[name='make']").val());
-
-		// Create a new Vehicle model with the data from the form inputs
-		// NB: We don't set an 'id' because that is generated automatically
-		//     by the database insertion and passed back to us.
-		/*var newSite = new Site({
-			make: parsedMake,
-			model: this.$("input[name='model']").val(),
-			year:  this.$("input[name='year']").val(),
-			vin:   this.$("input[name='vin']").val(),
-			odom:  this.$("input[name='odom']").val()
+		var newSite = new Site({
+			name: this.$("input[name='name']").val()
 		});
-		 */
-		this.closeModal();
-
 		// Don't allow empty inputs to be submitted
 		// TODO: implement some kind of error messaging.
-		/*if (newVehicle.get("model") != "" && newVehicle.get("year") != "" &&
-		    newVehicle.get("vin") != "" && newVehicle.get("odom") != "") {
+		if (newSite.get("name") != "") {
 
 			// This is the actual AJAX request that saves the new Vehicle
-			newVehicle.save({},{
+			newSite.save({},{
 				// The 'success' handler only fires on non-error codes
 				success: _.bind(function(model,response,collection) {
 					// Simply adding the new Vehicle model to our collection
 					// is enough because then the event bindings that were
 					// defined in AppView.initialize take over
-					this.vehicles.add(model);
+					this.sites.add(model);
 				},this)
 			});
-		}*/
+		}
 	},
 	
 	// This method is the access point of all DOM manipulation by the
 	// AppView object
 	render: function() {
 		this.$el.html(this.template()({privilege: this.user.get("privilege")}));
-		this.addAllVehicles();
-		this.createMap();
-		this.populateMap();
-	},
-
-	// This method creates a L.map object centered on Ann Arbor, MI
-	// This method has the side effect of loading a map tile set
-	// and displaying a blank map that can be interacted with.
-	createMap: function() {
-		this.map = L.map('map-container', {
-			layers: MQ.mapLayer(),
-			center: [42.24558,-83.747088],
-			zoom: 12
-		});
-	},
-
-	// This method loops through each Trip model of each Vehicle model and
-	// for every Trip that has a truthy "display" attribute, calls the
-	// AppView.drawMapMarker method passing each Datapoint model of the Trip
-	// model in succession.
-	populateMap: function() {
-		_.each(this.mapMarkers, _.bind(function(marker) {
-			this.map.removeLayer(marker); 
-		},this));
-
-		this.vehicles.each(_.bind(function(vehicle) {
-			if (vehicle.get("display")) {
-				if (vehicle.get("trips").length) {
-					vehicle.get("trips").each(_.bind(function(trip) {
-						if (trip.get("display")) {
-							if (trip.get("datapoints").length && typeof trip.get("datapoints").each !== "undefined") {
-								trip.get("datapoints").each(this.drawMapMarker, this);
-							}
-						}
-					},this));
-				}
-			}
-		}, this));
-	},
-
-	// This method takes a Datapoint model and draws the corresponding map marker
-	// NB: The key that is created in the mapMarkers object is the unique cid that
-	//     Backbone creates for each new model. You should not ever use this key as
-	//     it is created at runtime and could be different each time the JS runs.
-	drawMapMarker: function(datapoint) {
-		this.mapMarkers[datapoint.cid] = L.marker( [datapoint.get('lat'), datapoint.get('lon')]).addTo(this.map);
-
-		var view = new DatapointView({ model: datapoint });
-		this.mapMarkers[datapoint.cid].bindPopup(view.render().el);
+		this.addAllSites();
 	}
 });
 
@@ -14683,93 +14564,47 @@ var DatapointView = Backbone.View.extend({
 });
 
 /**
- * SelectVehicle BackboneJS view for IOSiX Fleet Webapp
+ * Node BackboneJS view for Dossier
  *
- * Copyright 2014 IOSiX LLC
- * All Rights Reserved
- *
- */
-
-// The SelectVehicleView is each option in the HTML select tag where the
-// user picks the vehicle that the .IOS data file to upload corresponds to.
-
-var SelectVehicleView = Backbone.View.extend({
-	// The SelectVehicleView DOM element is an "option" HTML tag
-	tagName: "option",
-
-	// SelectVehicleView's deal with Vehicle models. Note that this is a clear
-	// case of a single model having more than view. This makes sense as each
-	// way of representing the same data model should be its own view. This
-	// has the implication however that if one view changes a model attribute,
-	// all views that are bound to the model will act upon the change.
-	model: Vehicle,
-
-	// A convenience wrapper around the UnderscoreJS template function.
-	// The template for the SelectVehicleView can be found in /templates/intex.html
-	template: function() {
-		return _.template($("#select-vehicle-template").html());
-	},
-
-	// This method is called everytime that we create a new SelectVehicleView
-	// object. You should be pretty familiar with this construct by this point in
-	// the code base.
-	initialize: function() {
-		// The SelectVehicleView is not much more that an automagically created
-		// option tag, so we don't do anything special with it other than create
-		// and display it.
-	},
-
-	// Create the SelectVehicleView DOM elements based on the vehicle model and
-	// the HTML template.
-	render: function() {
-		this.$el.html (this.template()(this.model.toJSON()));
-		this.$el.attr("value",this.model.get("id"));
-		return this;
-	}
-});
-
-/**
- * Trip BackboneJS view for IOSiX Fleet Webapp
- *
- * Copyright 2014 IOSiX LLC
- * All Rights Reserved
+ * Copyright 2014 zachwick <zach@zachwick.com>
+ * Licensed under the AGPLv3 or later
  *
  */
 
-var TripView = Backbone.View.extend({
-	// TripView DOM elements are 'li' tags.
+var NodeView = Backbone.View.extend({
+	// NodeView DOM elements are 'li' tags.
 	tagName: "li",
 
-	// The TripView object deals with Trip models.
-	model: Trip,
+	// The NodeView object deals with Node models.
+	model: Node,
 
 	// An easy to use wrapper around the Underscore template function.
 	template: function() {
-		return _.template($("#trip-template").html());
+		return _.template($("#node-template").html());
 	},
 
-	// Binding UI events that we care about to TripView methods
+	// Binding UI events that we care about to NodeView methods
 	events: {
-		"click .trip-display": "toggleDisplayTrip"
+		"click .trip-display": "toggleDisplayNode"
 	},
 
-	// The TripView.initialize method is called whenever we create a new
-	// TripView object. You can think of if like a C++ constructor.
+	// The NodeView.initialize method is called whenever we create a new
+	// NodeView object. You can think of if like a C++ constructor.
 	initialize: function() {
-		// We don't do a whole lot with this view since Trips are kind of
+		// We don't do a whole lot with this view since Nodes are kind of
 		// an artificial construct anyway which only exist to have a default
-		// grouping of Datapoints that correspond to a Vehicle.
+		// grouping of Datapoints that correspond to a Site.
 	},
 
-	// This method is called any time that the .trip-display checkbox is clicked
+	// This method is called any time that the .node-display checkbox is clicked
 	// If the box is checked, we get all of the Datapoint child nodes for this
-	// trip. If the box is not checked, we don't fetch anything. In either case
+	// node. If the box is not checked, we don't fetch anything. In either case
 	// we call the AppView.populateMap method in order to draw map markers.
 	// TODO: Directly calling the AppView.populateMap method is very dirty. It
 	//       should instead be bound to a change event on a model, and then
 	//       instead of calling it by ourselves, we can just toggle a model
 	//       attribute.
-	toggleDisplayTrip: function(e) {
+	toggleDisplayNode: function(e) {
 		this.model.set({ display: this.$("input[name='trip-display']").is(":checked") });
 		if (this.model.get("display")) {
 			this.model.fetch({
@@ -14790,38 +14625,83 @@ var TripView = Backbone.View.extend({
 });
 
 /**
- * Vehicle BackboneJS view for IOSiX Fleet Webapp
- * 
- * Copyright 2014 IOSiX LLC
- * All Rights Reserved
+ * SelectSite BackboneJS view for Dossier
+ *
+ * Copyright 2014 zachwick <zach@zachwick.com>
+ * Licensed under the AGPLv3 or later
  *
  */
 
-var VehicleView = Backbone.View.extend({
+// The SelectSiteView is each option in the HTML select tag where the
+// user picks the site that the data file to upload corresponds to.
+
+var SelectSiteView = Backbone.View.extend({
+	// The SelectSiteView DOM element is an "option" HTML tag
+	tagName: "option",
+
+	// SelectSiteView's deal with Site models. Note that this is a clear
+	// case of a single model having more than view. This makes sense as each
+	// way of representing the same data model should be its own view. This
+	// has the implication however that if one view changes a model attribute,
+	// all views that are bound to the model will act upon the change.
+	model: Site,
+
+	// A convenience wrapper around the UnderscoreJS template function.
+	// The template for the SelectSiteView can be found in /templates/intex.html
+	template: function() {
+		return _.template($("#select-site-template").html());
+	},
+
+	// This method is called everytime that we create a new SelectSiteView
+	// object. You should be pretty familiar with this construct by this point in
+	// the code base.
+	initialize: function() {
+		// The SelectSiteView is not much more that an automagically created
+		// option tag, so we don't do anything special with it other than create
+		// and display it.
+	},
+
+	// Create the SelectSiteView DOM elements based on the vehicle model and
+	// the HTML template.
+	render: function() {
+		this.$el.html (this.template()(this.model.toJSON()));
+		this.$el.attr("value",this.model.get("id"));
+		return this;
+	}
+});
+
+/**
+ * Site BackboneJS view for Dossier
+ * 
+ * Copyright 2014 zachwick <zach@zachwick.com>
+ * Licensed under the AGPLv3 or later
+ **/
+
+var SiteView = Backbone.View.extend({
 	// VehicleView DOM elements are "li" tags
 	tagName: "li",
 
 	// VehicleView's deal with Vehicle models.
 	// This is considered by all involved, a very smart thing.
-	model: Vehicle,
+	model: Site,
 
 	// A wrapper around the Underscore template function so that
 	// we can use it more easily.
 	template: function() {
-		return _.template($("#vehicle-template").html());
+		return _.template($("#site-template").html());
 	},
 
 	// Here we are binding any UI events that we are interested in
 	// NB: The toggleEditingState function is not implemented, so there is
-	//     currently no way to edit a vehicle except via the database.
+	//     currently no way to edit a site except via the database.
 	events: {
-		'click span:not(.delete):not(.edit):not(.trip-name):not(.trip-display)': 'toggleDisplayVehicle',
+		'click span:not(.delete):not(.edit):not(.not-name):not(.node-display)': 'toggleDisplaySite',
 		'click .delete': 'deleteSelf',
 		'click .edit': 'toggleEditingState'
 	},
 
 	// This method calls the REST API DELETE method which surprisingly,
-	// deletes the corresponding vehicle record from the database.
+	// deletes the corresponding site record from the database.
 	deleteSelf: function(e) {
 		e.stopPropagation();
 		e.preventDefault();
@@ -14829,24 +14709,24 @@ var VehicleView = Backbone.View.extend({
 	},
 
 	// This is not yet implemented, but the idea is to change all of the
-	// vehicle information fields (make, model, year, VIN) into inputs and
+	// site information fields into inputs and
 	// add a save button that calls this.model.save() when clicked. This means
 	// that a new event binding needs to be added for this view.
 	toggleEditingState: function(e) {
 
 	},
 
-	// This method opens and closes the row corresponding to this vehicle in the
-	// vehicle list.
+	// This method opens and closes the row corresponding to this site in the
+	// site list.
 	// The actual opening/closing is done by changing the "display" attribute on
 	// the model. In the 'initialize' method for this view, we bind the 'render'
 	// method to any change event on any of the model's attributes. This has the
 	// effect of re-rendering the VehicleView when we change the "display"
-	// attribute. In the template for the VehicleView, there is a ternary clause
+	// attribute. In the template for the SiteView, there is a ternary clause
 	// around the "display" that toggles a CSS class. This allows the user's 
 	// browser to use its CSS rendering to do the visual change instead of its 
 	// javascript engine - this results in better performance.
-	toggleDisplayVehicle: function(e) {
+	toggleDisplaySite: function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 		this.model.set({ display: !this.model.get("display") });
@@ -14855,7 +14735,7 @@ var VehicleView = Backbone.View.extend({
 		}
 	},
 
-	// This VehicleView.initialize function is called whenever we create a new
+	// This SiteView.initialize function is called whenever we create a new
 	// VehicleView object; Think of it kind of like a C++ constructor.
 	initialize: function() {
 		// Any time that any attribute of this view's model changes, call the
@@ -14870,36 +14750,36 @@ var VehicleView = Backbone.View.extend({
 		// Ensure that 'this' is bound correctly in each of the VehicleView's
 		// methods.
 		_.bindAll(this,
-		          "renderTrips",
-		          "renderOneTrip",
+		          "renderNodes",
+		          "renderOneNode",
 		          "render",
-		          "toggleDisplayVehicle",
+		          "toggleDisplaySite",
 		          "deleteSelf"
 		         );
 	},
 
-	// In this method, we call VehicleView.renderOneTrip for each trip that is
-	// associated with this VehicleView's Vehicle model.
-	renderTrips: function() {
+	// In this method, we call SiteView.renderOneNode for each node that is
+	// associated with this SiteView's Site model.
+	renderNodes: function() {
 		// Dafuq? Why is this guard needed at all? .each should be able to
 		// handle being called on an empty array; Damn javascript...
-		if (this.model.get("trips").length && typeof this.model.get("trips").each !== "undefined") {
-			this.model.get("trips").each(this.renderOneTrip, this);
+		if (this.model.get("nodes").length && typeof this.model.get("nodes").each !== "undefined") {
+			this.model.get("nodes").each(this.renderOneNode, this);
 		}
 	},
 
-	// This method creates a new TripView for each Trip model and puts the
-	// created DOM elements into the list of trips for this VehicleView.
-	renderOneTrip: function(trip) {
-		var view = new TripView({ model: trip });
-		this.$(".vehicle-trips").append(view.render().el);
+	// This method creates a new NodeView for each Node model and puts the
+	// created DOM elements into the list of nodes for this SiteView.
+	renderOneNode: function(node) {
+		var view = new NodeView({ model: node });
+		this.$(".site-nodes").append(view.render().el);
 	},
 
-	// Create/Manipulate the DOM in order to create and display the VehicleView
+	// Create/Manipulate the DOM in order to create and display the SiteView
 	render: function() {
 		this.$el.html (this.template()(this.model.toJSON()));
 		this.$el.toggleClass('state-expanded',this.model.get("display"));
-		this.renderTrips();
+		this.renderNodes();
 		return this;
 	}
 });
