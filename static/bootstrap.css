@@ -1,0 +1,223 @@
+#vehicle-list li {
+  list-style-type: none;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-collapse: collapse;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+#vehicle-list li.state-expanded {
+  background: #b2f9fc;
+}
+#vehicle-list li.state-expanded .vehicle-year {
+  text-align: left;
+}
+#vehicle-list li.state-expanded .vehicle-make {
+  text-align: left;
+}
+#vehicle-list li.state-expanded .vehicle-model {
+  text-align: left;
+}
+#vehicle-list li.state-expanded .vehicle-vin {
+  text-align: left;
+  margin-left: 5px;
+}
+#vehicle-list li.state-expanded .vehicle-odom {
+  text-align: left;
+  margin-left: 5px;
+}
+#vehicle-list li.state-expanded .vehicle-actions {
+  float: right;
+  position: relative;
+  right: 5px;
+  top: -40px;
+}
+#vehicle-list li .vehicle-actions span {
+  cursor: pointer;
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-radius: 2px;
+  padding: 0px 3px;
+  margin-left: 1px;
+  margin-bottom: 5px;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  width: auto;
+}
+#vehicle-list li .vehicle-trips {
+  padding: 0px;
+  border-collapse: collapse;
+}
+#app-container #toolbar-container {
+  padding: 0px;
+  border: 1px solid black;
+  width: 32%;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  height: 20px;
+}
+#app-container #toolbar-container.two-wide span {
+  width: 50%;
+}
+#app-container #toolbar-container.three-wide span {
+  width: 33%;
+}
+#app-container #toolbar-container.four-wide span {
+  width: 24%;
+}
+#app-container #toolbar-container.five-wide span {
+  width: 19%;
+}
+#app-container #toolbar-container span {
+  float: right;
+  height: 100%;
+  text-align: center;
+}
+#app-container #toolbar-container span.has-l-border {
+  border-left: 1px solid black;
+}
+#app-container #toolbar-container span.has-r-border {
+  border-right: 1px solid black;
+}
+#app-container #toolbar-container span:hover {
+  cursor: pointer;
+}
+#app-container #vehicle-list {
+  padding: 0px;
+  margin: 0px;
+  border: 1px solid black;
+  border-radius: 2px;
+  width: 32%;
+  position: absolute;
+  right: 5px;
+  top: 30px;
+  border-collapse: collapse;
+  text-align: center;
+}
+#app-container #modal-background {
+  display: none;
+  opacity: .75;
+  background: white;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 0px;
+  margin: 0px;
+  z-index: 100;
+}
+#app-container .modal-wrapper {
+  display: none;
+  z-index: 101;
+  background: white;
+  border: 2px solid black;
+  border-radius: 4px;
+  position: absolute;
+  width: 32%;
+  left: 32%;
+  top: 33%;
+  text-align: center;
+  border-collapse: collapse;
+}
+#app-container .modal-wrapper .x-button {
+  float: right;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 0px 4px;
+}
+#app-container .modal-wrapper #add-user-form {
+  position: relative;
+  bottom: 0px;
+  padding: 2px 0px;
+  text-align: center;
+}
+#app-container .modal-wrapper #add-user-form input {
+  width: auto;
+  margin-top: 3px;
+}
+#app-container .modal-wrapper #add-user-form input[type="submit"] {
+  background: none;
+  border: 1px solid black;
+  width: auto;
+  margin-top: 15px;
+}
+#app-container .modal-wrapper #add-vehicle-form {
+  position: relative;
+  bottom: 0px;
+  padding: 2px 0px;
+  text-align: center;
+}
+#app-container .modal-wrapper #add-vehicle-form input {
+  width: auto;
+  margin-top: 3px;
+}
+#app-container .modal-wrapper #add-vehicle-form input[type="submit"] {
+  background: none;
+  border: 1px solid black;
+  width: auto;
+  margin-top: 15px;
+}
+#app-container .modal-wrapper #upload-file-form {
+  position: relative;
+  padding: 3px 0px;
+  text-align: center;
+}
+#app-container .modal-wrapper #upload-file-form input {
+  width: auto;
+  margin-top: 3px;
+}
+#app-container .modal-wrapper #upload-file-form input[type="submit"] {
+  background: none;
+  border: 1px solid black;
+  width: auto;
+  margin-top: 15px;
+}
+#app-container #map-container {
+  width: 66%;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  bottom: 5px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+#login-container #login-form-wrapper {
+  width: 40%;
+  position: absolute;
+  top: 45%;
+  left: 30%;
+  padding: 2px 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  border-radius: 2px;
+  text-align: center;
+}
+#login-container #login-form-wrapper span {
+  text-align: center;
+}
+#login-container #login-form-wrapper input {
+  width: auto;
+  margin-top: 3px;
+}
+#login-container #login-form-wrapper input[type="submit"] {
+  background: none;
+  border: 1px solid black;
+  width: auto;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#app-container {
+  width: 100%;
+  height: auto;
+  display: relative;
+}
+.state-hidden {
+  display: none;
+}

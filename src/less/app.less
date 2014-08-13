@@ -1,0 +1,185 @@
+#app-container {
+	#toolbar-container {
+		padding: 0px;
+		border: 1px solid black;
+		width: 32%;
+		position: absolute;
+		right: 5px;
+		top: 5px;
+		height: 20px;
+
+		&.two-wide {
+			span {
+				width: 50%;
+			}
+		}
+		&.three-wide {
+			span {
+				width: 33%;
+			}
+		}
+		&.four-wide {
+			span {
+				width: 24%;
+			}
+		}
+		&.five-wide {
+			span {
+				width: 19%;
+			}
+		}
+
+		span {
+			float: right;
+			height: 100%;
+			text-align: center;
+			&.has-l-border {
+				border-left: 1px solid black;
+			}
+			&.has-r-border {
+				border-right: 1px solid black;
+			}
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+	#vehicle-list {
+		padding: 0px;
+		margin: 0px;
+		border: 1px solid black;
+		border-radius: 2px;
+		width: 32%;
+		position: absolute;
+		right: 5px;
+		top: 30px;
+		border-collapse: collapse;
+		text-align: center;
+	}
+
+	#modal-background {
+		display: none;
+		opacity: .75;
+		background: white;
+		position: absolute;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		padding: 0px;
+		margin: 0px;
+		z-index: 100;
+	}
+
+	.modal-wrapper {
+		display: none;
+		z-index: 101;
+		background: white;
+		border: 2px solid black;
+		border-radius: 4px;
+		position: absolute;
+		width: 32%;
+		left: 32%;
+		top: 33%;
+		text-align: center;
+		border-collapse: collapse;
+
+		.x-button {
+			float: right;
+			cursor: pointer;
+			border: 1px solid black;
+			border-radius: 2px;
+			padding: 0px 4px;
+		}
+
+		#add-user-form {
+			position: relative;
+			bottom: 0px;
+			padding: 2px 0px;
+			text-align: center;
+			input {
+				width: auto;
+				margin-top: 3px;
+				&[type="submit"] {
+					background: none;
+					border: 1px solid black;
+					width: auto;
+					margin-top: 15px;
+				}
+			}
+		}
+
+		#add-vehicle-form {
+			position: relative;
+			bottom: 0px;
+			padding: 2px 0px;
+			text-align: center;
+			input {
+				width: auto;
+				margin-top: 3px;
+				&[type="submit"] {
+					background: none;
+					border: 1px solid black;
+					width: auto;
+					margin-top: 15px;
+				}
+			}
+		}
+
+		#upload-file-form {
+			position: relative;
+			padding: 3px 0px;
+			text-align: center;
+			input {
+				width: auto;
+				margin-top: 3px;
+				&[type="submit"] {
+					background: none;
+					border: 1px solid black;
+					width: auto;
+					margin-top: 15px;
+				}
+			}
+		}
+	}
+
+	#map-container {
+		width: 66%;
+		position: absolute;
+		left: 5px;
+		top: 5px;
+		bottom: 5px;
+		border: 1px solid black;
+		border-radius: 2px;
+	}
+}
+
+#login-container {
+	#login-form-wrapper {
+		width: 40%;
+		position: absolute;
+		top: 45%;
+		left: 30%;
+		padding: 2px 0px;
+		margin-left: auto;
+		margin-right: auto;
+		border: 1px solid black;
+		border-radius: 2px;
+		text-align: center;
+		span {
+			text-align: center;
+		}
+		input {
+			width: auto;
+			margin-top: 3px;
+			&[type="submit"] {
+				background: none;
+				border: 1px solid black;
+				width: auto;
+				margin-top: 15px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+	}
+}

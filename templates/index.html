@@ -1,0 +1,117 @@
+<div id="app-container"></div>
+
+<script type="text/template" id="app-template">
+  <div id="modal-background"></div>
+  <div id="map-container"></div>
+  <div id="toolbar-container" class="<%= privilege == 2 ? 'four-wide' : 'three-wide' %>">
+	<span class="logout-button">&#9032;</span>
+	<span class="add-vehicle-button has-l-border has-r-border">Vehicle++</span>
+	<% if (privilege == 2) { %>
+	  <span class="add-user-button has-l-border">User++</span>
+	<% } %>
+	  <span class="upload-datafile-button">Upload</span>
+  </div>
+  <ul id="vehicle-list"></ul>
+  <div id="add-user-modal" class="modal-wrapper">
+	<span class="add-user-header">Add User</span>
+	<span class="x-button">X</span>
+	<form id="add-user-form">
+	  <input type="text" name="username" placeholder="Username:"/>
+	  <input type="password" name="password" placeholder="Password:"/>
+	  <input type="password" name="confirm" placeholder="Confirm Password:"/>
+	  <input type="email" name="email" placeholder="user@example.com"/>
+	  <select class="user-privilege-select">
+		<option value="1">Fleet Manager</option>
+		<option value="2">IOSiX Admin</option>
+	  </select>
+	  <input type="submit" value="Add User" class="add-user-submit"/>
+	</form>
+  </div>
+  <div id="add-node-modal" class="modal-wrapper">
+	  <span class="add-vehicle-header">Add Vehicle</span>
+	  <span class="x-button">X</span>
+	  <form id="add-vehicle-form">
+		<input type="text" name="year" placeholder="Year:"></input>
+		<input type="text" name="make" placeholder="Make:"></input>
+		<input type="text" name="model" placeholder="Model:"></input>
+		<input type="text" name="vin" placeholder="VIN:"></input>
+		<input type="text" name="odom" placeholder="Odometer:"></input>
+		<input type="submit" value="Add New Vehicle"></input>
+	  </form>
+  </div>
+  <div id="upload-data-modal" class="modal-wrapper">
+	<span class="upload-data-header">Upload Data File</span>
+	<span class="x-button">X</span>
+	<form id="upload-file-form" method="POST"
+		  enctype="multipart/form-data" action="/upload/">
+	  <input type="file" name="inputFile" class="input-file">
+	  <!--<select class="upload-vehicle-select" name="vehicleId">
+		
+	  </select>-->
+	  <input type="submit" value="Upload" class="upload-submit">
+	</form>
+  </div>
+</script>
+
+<script type="text/template" id="select-vehicle-template">
+  <%= year + " " + MAKE[make] + " " + model %>
+</script>
+
+<script type="text/template" id="vehicle-template">
+  <span class="vehicle-year"><%= year %></span>
+  <span class="vehicle-make"><%= MAKE[make] %></span>
+  <span class="vehicle-model"><%= model %></span>
+  <div class="vehicle-vin <%- display ? 'state-visible' :
+  'state-hidden' %>">VIN: <%= vin %></div>
+  <div class="vehicle-odom <%- display ? 'state-visible' :
+  'state-hidden' %>">Odom: <%= odom %></div>
+  <div class="vehicle-actions <%- display ? 'state-visible' : 'state-hidden' %>">
+	<span class="delete">Delete</span>
+	<span class="edit">Edit</span>
+  </div>
+  <ul class="vehicle-trips <%- display ? 'state-visible' :
+  'state-hidden' %>">
+
+  </ul>
+</script>
+
+<script type="text/template" id="trip-template">
+  <span class="trip-display">
+	<input type="checkbox" name="trip-display">
+  </span>
+  <span class="trip-name"><%= start + " - " +
+  end %></span>
+</script>
+
+<script type="text/template" id="datapoint-template">
+  <div class="datapoint-timestamp">
+	<span class="label">Time: </span>
+	<span class="value"><%= timestamp %></span>
+  </div>
+  <div class="datapoint-location">
+	<span class="value"><%= "[" + lat + ", " + lon + "]" %></span>
+  </div>
+  <div class="datapoint-throttle">
+	<span class="label">Throttle: </span>
+	<span class="value"><%= throttle %></span>
+  </div>
+  <div class="datapoint-rpm">
+	<span class="label">RPM: </span>
+	<span class="value"><%= rpm %></span>	
+  </div>
+  <div class="datapoint-fuel">
+	<span class="label">Fuel Level: </span>
+	<span class="value"><%= fuel %></span>
+  </div>
+  <div class="datapoint-maf">
+	<span class="label">Mass Air Flow: </span>
+	<span class="value"><%= maf %></span>
+  </div>
+</script>
+
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+ <link rel="stylesheet"
+ href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+<script src="http://beta.mapquestapi.com/sdk/leaflet/v0.1/mq-map.js?key=Fmjtd%7Cluur21ubnd%2C75%3Do5-90t0q6"></script>
+<script src="/static/Dossier.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/bootstrap.css" />
