@@ -117,8 +117,16 @@ DOM</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>	events: {
-		<span class="hljs-string">'click .logout-button'</span>: <span class="hljs-string">'doLogout'</span>
-	},</pre></div></div>
+		<span class="hljs-string">'click .logout-button'</span>: <span class="hljs-string">'doLogout'</span>,
+		<span class="hljs-string">'submit #add-site-form'</span>: <span class="hljs-string">'newSite'</span>,
+		<span class="hljs-string">'submit #add-user-form'</span>: <span class="hljs-string">'newUser'</span>,
+		<span class="hljs-string">'click .add-site-button'</span>: <span class="hljs-string">'showAddSiteModal'</span>,
+		<span class="hljs-string">'click .add-user-button'</span>: <span class="hljs-string">'showAddUserModal'</span>,
+		<span class="hljs-string">'click .x-button'</span>: <span class="hljs-string">'closeModal'</span>
+	},
+
+
+	closeModal: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span></pre></div></div>
             
         </li>
         
@@ -128,6 +136,62 @@ DOM</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Clear any input elements except submit buttons</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">".modal-wrapper:visible input:not([type='submit'])"</span>).val(<span class="hljs-string">""</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Hide the semi-opaque background</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">"#modal-background"</span>).hide();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Hide any visible modal-wrapper divs</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">".modal-wrapper:visible"</span>).hide();
+	},
+
+	showAddSiteModal: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
+		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">"#modal-background"</span>).show();
+		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">"#add-site-modal"</span>).show();
+	},
+	
+	showAddUserModal: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
+		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">"#modal-background"</span>).show();
+		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">"#add-user-modal"</span>).show();
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p>This method directs the browser to ‘/logout’ which logs out the user
 and then triggers the whole create session/login flow.</p>
@@ -141,11 +205,11 @@ and then triggers the whole create session/login flow.</p>
         </li>
         
         
-        <li id="section-6">
+        <li id="section-9">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>This AppView.initialize function is called whenever we create a new
 AppView object; Think of it kind of like a C++ constructor.</p>
@@ -157,11 +221,11 @@ AppView object; Think of it kind of like a C++ constructor.</p>
         </li>
         
         
-        <li id="section-7">
+        <li id="section-10">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>The a Backbone collection of Vehicle models
 this.vehicles = new Vehicles();</p>
@@ -175,11 +239,11 @@ this.vehicles = new Vehicles();</p>
         </li>
         
         
-        <li id="section-8">
+        <li id="section-11">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-8">&#182;</a>
+                <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
               <p>When we ‘add’ or ‘remove’ from our collection of sites, call the
 AppView.render method. Look at the BackboneJS docs for more info.</p>
@@ -191,11 +255,11 @@ AppView.render method. Look at the BackboneJS docs for more info.</p>
         </li>
         
         
-        <li id="section-9">
+        <li id="section-12">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
+                <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
               <p>When we ‘change’ the user model, re-render</p>
 
@@ -206,11 +270,11 @@ AppView.render method. Look at the BackboneJS docs for more info.</p>
         </li>
         
         
-        <li id="section-10">
+        <li id="section-13">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-10">&#182;</a>
+                <a class="pilcrow" href="#section-13">&#182;</a>
               </div>
               <p>Call the AppView.render method to initialize the DOM</p>
 
@@ -221,11 +285,11 @@ AppView.render method. Look at the BackboneJS docs for more info.</p>
         </li>
         
         
-        <li id="section-11">
+        <li id="section-14">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-11">&#182;</a>
+                <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
               <p>Make sure that our collection of Site objects is up to date.</p>
 
@@ -236,11 +300,11 @@ AppView.render method. Look at the BackboneJS docs for more info.</p>
         </li>
         
         
-        <li id="section-12">
+        <li id="section-15">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-12">&#182;</a>
+                <a class="pilcrow" href="#section-15">&#182;</a>
               </div>
               <p>Make sure that our user object reflects the currently logged-in user</p>
 
@@ -251,11 +315,11 @@ AppView.render method. Look at the BackboneJS docs for more info.</p>
         </li>
         
         
-        <li id="section-13">
+        <li id="section-16">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-13">&#182;</a>
+                <a class="pilcrow" href="#section-16">&#182;</a>
               </div>
               <p>Ensure that ‘this’ plays nicely inside each of our AppView’s methods</p>
 
@@ -266,18 +330,21 @@ AppView.render method. Look at the BackboneJS docs for more info.</p>
 		          <span class="hljs-string">"addAllSites"</span>,
 		          <span class="hljs-string">"newSite"</span>,
 		          <span class="hljs-string">"populateDataTable"</span>,
-		          <span class="hljs-string">"render"</span>
+		          <span class="hljs-string">"render"</span>,
+		          <span class="hljs-string">"showAddSiteModal"</span>,
+		          <span class="hljs-string">"showAddUserModal"</span>,
+		          <span class="hljs-string">"closeModal"</span>
 		         );
 	},</pre></div></div>
             
         </li>
         
         
-        <li id="section-14">
+        <li id="section-17">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-14">&#182;</a>
+                <a class="pilcrow" href="#section-17">&#182;</a>
               </div>
               <p>Create a new SiteView and add it to the displayed list of sites
 @param site - A Site model to create a view for.</p>
@@ -292,11 +359,11 @@ AppView.render method. Look at the BackboneJS docs for more info.</p>
         </li>
         
         
-        <li id="section-15">
+        <li id="section-18">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-15">&#182;</a>
+                <a class="pilcrow" href="#section-18">&#182;</a>
               </div>
               <p>Create a new SiteView for each Site model in our sites
 collection. We do this by calling AppView.addOneSite for each model.</p>
@@ -320,16 +387,18 @@ collection. We do this by calling AppView.addOneSite for each model.</p>
 			});
 			newUser.save();
 		}
+
+		<span class="hljs-keyword">this</span>.closeModal();
 	},</pre></div></div>
             
         </li>
         
         
-        <li id="section-16">
+        <li id="section-19">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-16">&#182;</a>
+                <a class="pilcrow" href="#section-19">&#182;</a>
               </div>
               <p>Add a new site to the database
 @param e - the Event object that triggered AppView.newVehicle being
@@ -343,16 +412,18 @@ collection. We do this by calling AppView.addOneSite for each model.</p>
 
 		<span class="hljs-keyword">var</span> newSite = <span class="hljs-keyword">new</span> Site({
 			name: <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='name']"</span>).val()
-		});</pre></div></div>
+		});
+
+		<span class="hljs-keyword">this</span>.closeModal();</pre></div></div>
             
         </li>
         
         
-        <li id="section-17">
+        <li id="section-20">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-17">&#182;</a>
+                <a class="pilcrow" href="#section-20">&#182;</a>
               </div>
               <p>Don’t allow empty inputs to be submitted
 TODO: implement some kind of error messaging.</p>
@@ -364,11 +435,11 @@ TODO: implement some kind of error messaging.</p>
         </li>
         
         
-        <li id="section-18">
+        <li id="section-21">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-18">&#182;</a>
+                <a class="pilcrow" href="#section-21">&#182;</a>
               </div>
               <p>This is the actual AJAX request that saves the new Vehicle</p>
 
@@ -379,11 +450,11 @@ TODO: implement some kind of error messaging.</p>
         </li>
         
         
-        <li id="section-19">
+        <li id="section-22">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-19">&#182;</a>
+                <a class="pilcrow" href="#section-22">&#182;</a>
               </div>
               <p>The ‘success’ handler only fires on non-error codes</p>
 
@@ -394,11 +465,11 @@ TODO: implement some kind of error messaging.</p>
         </li>
         
         
-        <li id="section-20">
+        <li id="section-23">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-20">&#182;</a>
+                <a class="pilcrow" href="#section-23">&#182;</a>
               </div>
               <p>Simply adding the new Vehicle model to our collection
 is enough because then the event bindings that were
@@ -415,11 +486,11 @@ defined in AppView.initialize take over</p>
         </li>
         
         
-        <li id="section-21">
+        <li id="section-24">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-21">&#182;</a>
+                <a class="pilcrow" href="#section-24">&#182;</a>
               </div>
               <p>This method populates the data table with all of the selected nodes’
 data</p>
@@ -447,11 +518,11 @@ data</p>
         </li>
         
         
-        <li id="section-22">
+        <li id="section-25">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-22">&#182;</a>
+                <a class="pilcrow" href="#section-25">&#182;</a>
               </div>
               <p>This method takes a Datapoint model and creates the corresponding data
 table record.</p>
@@ -464,11 +535,11 @@ table record.</p>
         </li>
         
         
-        <li id="section-23">
+        <li id="section-26">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-23">&#182;</a>
+                <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
               <p>TODO: use jQuery to add the new DatapointView to the data table</p>
 
@@ -480,11 +551,11 @@ table record.</p>
         </li>
         
         
-        <li id="section-24">
+        <li id="section-27">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-24">&#182;</a>
+                <a class="pilcrow" href="#section-27">&#182;</a>
               </div>
               <p>This method is the access point of all DOM manipulation by the
 AppView object</p>

@@ -12,7 +12,32 @@ var AppView = Backbone.View.extend({
 
 	// Define any UI events and the functions that are bound to them
 	events: {
-		'click .logout-button': 'doLogout'
+		'click .logout-button': 'doLogout',
+		'submit #add-site-form': 'newSite',
+		'submit #add-user-form': 'newUser',
+		'click .add-site-button': 'showAddSiteModal',
+		'click .add-user-button': 'showAddUserModal',
+		'click .x-button': 'closeModal'
+	},
+
+
+	closeModal: function(e) {
+		// Clear any input elements except submit buttons
+		this.$(".modal-wrapper:visible input:not([type='submit'])").val("");
+		// Hide the semi-opaque background
+		this.$("#modal-background").hide();
+		// Hide any visible modal-wrapper divs
+		this.$(".modal-wrapper:visible").hide();
+	},
+
+	showAddSiteModal: function(e) {
+		this.$("#modal-background").show();
+		this.$("#add-site-modal").show();
+	},
+	
+	showAddUserModal: function(e) {
+		this.$("#modal-background").show();
+		this.$("#add-user-modal").show();
 	},
 
 	// This method directs the browser to '/logout' which logs out the user
@@ -52,7 +77,10 @@ var AppView = Backbone.View.extend({
 		          "addAllSites",
 		          "newSite",
 		          "populateDataTable",
-		          "render"
+		          "render",
+		          "showAddSiteModal",
+		          "showAddUserModal",
+		          "closeModal"
 		         );
 	},
 
@@ -82,6 +110,8 @@ var AppView = Backbone.View.extend({
 			});
 			newUser.save();
 		}
+
+		this.closeModal();
 	},
 
 	// Add a new site to the database
@@ -94,6 +124,9 @@ var AppView = Backbone.View.extend({
 		var newSite = new Site({
 			name: this.$("input[name='name']").val()
 		});
+
+		this.closeModal();
+
 		// Don't allow empty inputs to be submitted
 		// TODO: implement some kind of error messaging.
 		if (newSite.get("name") != "") {
