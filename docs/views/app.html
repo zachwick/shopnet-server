@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>app.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="datapoint.html">
+                datapoint.js
+              </a>
+            
+              
+              <a class="source" href="node.html">
+                node.js
+              </a>
+            
+              
+              <a class="source" href="selectSite.html">
+                selectSite.js
+              </a>
+            
+              
+              <a class="source" href="site.html">
+                site.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>app.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> AppView = Backbone.View.extend({</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>A Sizzle/jQuery selector for the DOM element that an AppView object
+uses to interact with the DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	el: <span class="hljs-string">"#app-container"</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Note that this is a fancy way to wrap around the UnderscoreJS template
+function. We will use this AppView.template function to manipulate the
+DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	template: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">return</span> _.template($(<span class="hljs-string">"#app-template"</span>).html());
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Define any UI events and the functions that are bound to them</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	events: {
+		<span class="hljs-string">'click .logout-button'</span>: <span class="hljs-string">'doLogout'</span>
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>This method directs the browser to ‘/logout’ which logs out the user
+and then triggers the whole create session/login flow.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	doLogout: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
+		window.location = <span class="hljs-string">"/logout"</span>;
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>This AppView.initialize function is called whenever we create a new
+AppView object; Think of it kind of like a C++ constructor.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	initialize: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(options)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>The a Backbone collection of Vehicle models
+this.vehicles = new Vehicles();</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.sites = <span class="hljs-keyword">new</span> Sites();
+
+		<span class="hljs-keyword">this</span>.user = <span class="hljs-keyword">new</span> User();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>When we ‘add’ or ‘remove’ from our collection of sites, call the
+AppView.render method. Look at the BackboneJS docs for more info.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.listenTo(<span class="hljs-keyword">this</span>.sites, <span class="hljs-string">'add remove'</span>, <span class="hljs-keyword">this</span>.render);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>When we ‘change’ the user model, re-render</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.listenTo(<span class="hljs-keyword">this</span>.user, <span class="hljs-string">'change'</span>, <span class="hljs-keyword">this</span>.render);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Call the AppView.render method to initialize the DOM</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.render();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>Make sure that our collection of Site objects is up to date.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.sites.fetch();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Make sure that our user object reflects the currently logged-in user</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.user.fetch();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>Ensure that ‘this’ plays nicely inside each of our AppView’s methods</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		_.bindAll(<span class="hljs-keyword">this</span>,
+		          <span class="hljs-string">"addOneSite"</span>,
+		          <span class="hljs-string">"addAllSites"</span>,
+		          <span class="hljs-string">"newSite"</span>,
+		          <span class="hljs-string">"populateDataTable"</span>,
+		          <span class="hljs-string">"render"</span>
+		         );
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-14">&#182;</a>
+              </div>
+              <p>Create a new SiteView and add it to the displayed list of sites
+@param site - A Site model to create a view for.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	addOneSite: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(site)</span> {</span>
+		<span class="hljs-keyword">var</span> view = <span class="hljs-keyword">new</span> SiteView({ model: site });
+		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">"#site-list"</span>).append(view.render().el);
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Create a new SiteView for each Site model in our sites
+collection. We do this by calling AppView.addOneSite for each model.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	addAllSites: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">this</span>.sites.each(<span class="hljs-keyword">this</span>.addOneSite, <span class="hljs-keyword">this</span>);
+	},
+
+	newUser: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
+		e.stopPropagation();
+		e.preventDefault();
+
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='password']"</span>).val() == <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='confirm']"</span>).val()) {
+			<span class="hljs-keyword">var</span> newUser = <span class="hljs-keyword">new</span> User({
+				username: <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='username']"</span>).val(),
+				email: <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='email']"</span>).val(),
+				password: <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='password']"</span>).val(),
+				privilege: <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"#add-user-form &gt; option:selected"</span>).val()
+			});
+			newUser.save();
+		}
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+              <p>Add a new site to the database
+@param e - the Event object that triggered AppView.newVehicle being
+           called.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	newSite: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
+		e.stopPropagation();
+		e.preventDefault();
+
+		<span class="hljs-keyword">var</span> newSite = <span class="hljs-keyword">new</span> Site({
+			name: <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='name']"</span>).val()
+		});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+              <p>Don’t allow empty inputs to be submitted
+TODO: implement some kind of error messaging.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">if</span> (newSite.get(<span class="hljs-string">"name"</span>) != <span class="hljs-string">""</span>) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+              <p>This is the actual AJAX request that saves the new Vehicle</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>			newSite.save({},{</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+              <p>The ‘success’ handler only fires on non-error codes</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>				success: _.bind(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(model,response,collection)</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-20">&#182;</a>
+              </div>
+              <p>Simply adding the new Vehicle model to our collection
+is enough because then the event bindings that were
+defined in AppView.initialize take over</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>					<span class="hljs-keyword">this</span>.sites.add(model);
+				},<span class="hljs-keyword">this</span>)
+			});
+		}
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-21">&#182;</a>
+              </div>
+              <p>This method populates the data table with all of the selected nodes’
+data</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	populateDataTable: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">".data-table-tbody"</span>).empty();
+
+		<span class="hljs-keyword">this</span>.sites.each(_.bind(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(site)</span> {</span>
+			<span class="hljs-keyword">if</span> (site.get(<span class="hljs-string">"display"</span>)) {
+				<span class="hljs-keyword">if</span> (site.get(<span class="hljs-string">"nodes"</span>).length) {
+					site.get(<span class="hljs-string">"nodes"</span>).each(_.bind(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(node)</span> {</span>
+						<span class="hljs-keyword">if</span> (node.get(<span class="hljs-string">"display"</span>)) {
+							<span class="hljs-keyword">if</span> (node.get(<span class="hljs-string">"datapoints"</span>).length &amp;&amp; <span class="hljs-keyword">typeof</span> node.get(<span class="hljs-string">"datapoints"</span>).each !== <span class="hljs-string">"undefined"</span>) {
+								node.get(<span class="hljs-string">"datapoints"</span>).each(<span class="hljs-keyword">this</span>.addDataTableEntry, <span class="hljs-keyword">this</span>);
+							}
+						}
+					},<span class="hljs-keyword">this</span>));
+				}
+			}
+		},<span class="hljs-keyword">this</span>));
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-22">&#182;</a>
+              </div>
+              <p>This method takes a Datapoint model and creates the corresponding data
+table record.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	addDataTableEntry: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(datapoint)</span> {</span>
+		<span class="hljs-keyword">var</span> view = <span class="hljs-keyword">new</span> DatapointView({ model: datapoint });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-23">&#182;</a>
+              </div>
+              <p>TODO: use jQuery to add the new DatapointView to the data table</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		<span class="hljs-keyword">this</span>.$(<span class="hljs-string">".data-table-tbody"</span>).append(view.render().el);
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-24">&#182;</a>
+              </div>
+              <p>This method is the access point of all DOM manipulation by the
+AppView object</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">this</span>.$el.html(<span class="hljs-keyword">this</span>.template()({privilege: <span class="hljs-keyword">this</span>.user.get(<span class="hljs-string">"privilege"</span>)}));
+		<span class="hljs-keyword">this</span>.addAllSites();
+	}
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

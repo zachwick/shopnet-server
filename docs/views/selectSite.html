@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>selectSite.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="app.html">
+                app.js
+              </a>
+            
+              
+              <a class="source" href="datapoint.html">
+                datapoint.js
+              </a>
+            
+              
+              <a class="source" href="node.html">
+                node.js
+              </a>
+            
+              
+              <a class="source" href="selectSite.html">
+                selectSite.js
+              </a>
+            
+              
+              <a class="source" href="site.html">
+                site.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>selectSite.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * SelectSite BackboneJS view for Dossier
+ *
+ * Copyright 2014 zachwick &lt;zach@zachwick.com&gt;
+ * Licensed under the AGPLv3 or later
+ *
+ */</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>The SelectSiteView is each option in the HTML select tag where the
+user picks the site that the data file to upload corresponds to.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> SelectSiteView = Backbone.View.extend({</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>The SelectSiteView DOM element is an “option” HTML tag</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	tagName: <span class="hljs-string">"option"</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>SelectSiteView’s deal with Site models. Note that this is a clear
+case of a single model having more than view. This makes sense as each
+way of representing the same data model should be its own view. This
+has the implication however that if one view changes a model attribute,
+all views that are bound to the model will act upon the change.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	model: Site,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>A convenience wrapper around the UnderscoreJS template function.
+The template for the SelectSiteView can be found in /templates/intex.html</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	template: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">return</span> _.template($(<span class="hljs-string">"#select-site-template"</span>).html());
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>This method is called everytime that we create a new SelectSiteView
+object. You should be pretty familiar with this construct by this point in
+the code base.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	initialize: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>The SelectSiteView is not much more that an automagically created
+option tag, so we don’t do anything special with it other than create
+and display it.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Create the SelectSiteView DOM elements based on the vehicle model and
+the HTML template.</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">this</span>.$el.html (<span class="hljs-keyword">this</span>.template()(<span class="hljs-keyword">this</span>.model.toJSON()));
+		<span class="hljs-keyword">this</span>.$el.attr(<span class="hljs-string">"value"</span>,<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">"id"</span>));
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+	}
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>datapoint.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="datapoint.html">
+                datapoint.js
+              </a>
+            
+              
+              <a class="source" href="node.html">
+                node.js
+              </a>
+            
+              
+              <a class="source" href="site.html">
+                site.js
+              </a>
+            
+              
+              <a class="source" href="user.html">
+                user.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>datapoint.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
+ * Datapoint BackboneJS model for Dossier Webapp
+ *
+ * Copyright 2014 zachwick &lt;zach@zachwick.com&gt;
+ * Licensed under the AGPLv3 or later
+ */</span>
+
+<span class="hljs-keyword">var</span> Datapoint = Backbone.RelationalModel.extend({</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>The object’s attribute to use a unique identifier</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	idAttribute: <span class="hljs-string">'id'</span>,
+
+	defaults: {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>The percentage of methane in the sample</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		methane: <span class="hljs-number">0.00</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>The percentage of CO2 in the sample</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		co2: <span class="hljs-number">0.00</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>The temperature of the sample</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		temp: <span class="hljs-number">0.00</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>The pressure of the sample</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		pressure: <span class="hljs-number">0.00</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Ambient temp</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		amb_temp: <span class="hljs-number">0.00</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>Pipe temp</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		pipe_temp: <span class="hljs-number">0.00</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Relative Humidity</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		humidity: <span class="hljs-number">0.00</span>,</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>Timestamp</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>		timestamp: <span class="hljs-number">0</span>
+	},</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>The REST API endpoint for Datapoint objects is at the URI fragment
+“/datapoints/“ and the URI for a particular Datapoint is “/datapoints/<id>“</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	urlRoot: <span class="hljs-string">'/datapoints/'</span>
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>Definition of a Backbone Collection made up of Datapoint objects
+This is needed for the Node -&gt; Datapoint relationship</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> Datapoints = Backbone.Collection.extend({
+	model: Datapoint,
+	url: <span class="hljs-string">'/sites/'</span>
+});</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
