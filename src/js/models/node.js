@@ -38,7 +38,10 @@ var Node = Backbone.RelationalModel.extend({
 		lat: 0.00,
 
 		// Longitude of the Node's physical position
-		lon: 0.00
+		lon: 0.00,
+
+		// MAC address
+		macaddr: 0
 	},
 	
 	// A URI fragment that corresponds to the REST API's URL of the endpoint

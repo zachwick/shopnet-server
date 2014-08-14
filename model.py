@@ -39,6 +39,7 @@ def get_nodes_for_site(site_id):
 def new_node(data):
     print("\n\n\n SET SITE_ID \n\n\n")
     new_id = db.insert("Node",
+                       macaddr=data['macaddr'],
                        lat=data['lat'],
                        lon=data['lon'],
                        site_id=data['site_id'])
@@ -64,13 +65,18 @@ def new_datapoint(data):
     amb_temp = data['amb_temp']
     pipe_temp = data['pipe_temp']
     humidity = data['humidity']
+    timestamp = data['timestamp']
 
     new_id = db.insert ("Datapoint",
                         node_id=node_id,
                         methane=methane,
                         co2=co2,
                         temp=temp,
-                        pressure=pressure)
+                        pressure=pressure,
+                        amb_temp=amb_temp,
+                        pipe_temp=pipe_temp,
+                        humidity=humidity,
+                        timestamp=timestamp)
 
     return new_id
 

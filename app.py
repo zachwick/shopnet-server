@@ -313,12 +313,14 @@ class SingleSite:
                     "id": node.id,
                     "lat": node.lat,
                     "lon": node.lon,
+                    "macaddr": node.macaddr
                 })
 
             data.append({
                 # TODO: add other site values here
                 "id":   site.id,
-                "name": site.name
+                "name": site.name,
+                "nodes": nodes
             })
 
         '''

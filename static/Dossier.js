@@ -14244,7 +14244,10 @@ var Datapoint = Backbone.RelationalModel.extend({
 		pipe_temp: 0.00,
 
 		// Relative Humidity
-		humidity: 0.00
+		humidity: 0.00,
+
+		// Timestamp
+		timestamp: 0
 	},
 
 	// The REST API endpoint for Datapoint objects is at the URI fragment
@@ -14299,7 +14302,10 @@ var Node = Backbone.RelationalModel.extend({
 		lat: 0.00,
 
 		// Longitude of the Node's physical position
-		lon: 0.00
+		lon: 0.00,
+
+		// MAC address
+		macaddr: 0
 	},
 	
 	// A URI fragment that corresponds to the REST API's URL of the endpoint

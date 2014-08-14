@@ -41,9 +41,6 @@
 	<form id="upload-file-form" method="POST"
 		  enctype="multipart/form-data" action="/upload/">
 	  <input type="file" name="inputFile" class="input-file">
-	  <!--<select class="upload-vehicle-select" name="vehicleId">
-		
-	  </select>-->
 	  <input type="submit" value="Upload" class="upload-submit">
 	</form>
   </div>
@@ -61,7 +58,6 @@
   </div>
   <ul class="site-nodes <%- display ? 'state-visible' :
   'state-hidden' %>">
-
   </ul>
 </script>
 
@@ -69,7 +65,7 @@
   <span class="node-display">
 	<input type="checkbox" name="node-display">
   </span>
-  <span class="node-name"><%= id %></span>
+  <span class="node-id"><%= id %></span>
 </script>
 
 <script type="text/template" id="datapoint-template">
