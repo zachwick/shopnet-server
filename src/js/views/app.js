@@ -51,6 +51,7 @@ var AppView = Backbone.View.extend({
 		          "addOneSite",
 		          "addAllSites",
 		          "newSite",
+		          "populateDataTable",
 		          "render"
 		         );
 	},
@@ -110,6 +111,12 @@ var AppView = Backbone.View.extend({
 		}
 	},
 	
+	// This method populates the data table with all of the selected nodes'
+	// data
+	populateDataTable: function() {
+		console.log("POPULATING");
+	},
+
 	// This method is the access point of all DOM manipulation by the
 	// AppView object
 	render: function() {

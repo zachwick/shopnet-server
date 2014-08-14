@@ -217,14 +217,23 @@ class SingleNode:
             for datapoint in self.datapoints:
                 if datapoint.node_id == node.id:
                     datapoints.append({
-                        # TODO: Datapoint values here
+                        "id": datapoint.id,
+                        "node_id": datapoint.node_id,
+                        "methane": datapoint.methane,
+                        "co2": datapoint.co2,
+                        "temp": datapoint.temp,
+                        "pressure": datapoint.pressure,
+                        "amb_temp": datapoint.amb_temp,
+                        "pipe_temp": datapoint.pipe_temp,
+                        "humidity": datapoint.humidity,
+                        "timestamp": str(datapoint.timestamp)
                     })
                 data.append({
                     "id": id,
                     "lat": node.lat,
                     "lon": node.lon,
+                    "macaddr": node.macaddr,
                     "datapoints": datapoints,
-                    # TODO: Other node values here
                 })
 
         '''

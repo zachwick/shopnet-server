@@ -20,7 +20,7 @@ var NodeView = Backbone.View.extend({
 
 	// Binding UI events that we care about to NodeView methods
 	events: {
-		"click .trip-display": "toggleDisplayNode"
+		"click .node-display": "toggleDisplayNode"
 	},
 
 	// The NodeView.initialize method is called whenever we create a new
@@ -34,21 +34,18 @@ var NodeView = Backbone.View.extend({
 	// This method is called any time that the .node-display checkbox is clicked
 	// If the box is checked, we get all of the Datapoint child nodes for this
 	// node. If the box is not checked, we don't fetch anything. In either case
-	// we call the AppView.populateMap method in order to draw map markers.
-	// TODO: Directly calling the AppView.populateMap method is very dirty. It
-	//       should instead be bound to a change event on a model, and then
-	//       instead of calling it by ourselves, we can just toggle a model
-	//       attribute.
+	// we call the AppView.populateDataTable method in order to create table
+	// records.
 	toggleDisplayNode: function(e) {
-		this.model.set({ display: this.$("input[name='trip-display']").is(":checked") });
+		this.model.set({ display: this.$("input[name='node-display']").is(":checked") });
 		if (this.model.get("display")) {
 			this.model.fetch({
 				success: _.bind(function(model, response, jqXHR) {
-					App.populateMap();
+					App.populateDataTable();
 				},this)
 			});
 		} else {
-			App.populateMap();
+			App.populateDataTable();
 		}
 	},
 
