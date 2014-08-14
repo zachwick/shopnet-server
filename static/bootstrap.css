@@ -13,6 +13,9 @@
 #site-list li.state-expanded .site-name {
   text-align: left;
 }
+#site-list li.state-expanded .site-nodes {
+  text-align: left;
+}
 #site-list li.state-expanded .site-actions {
   float: right;
   position: relative;
