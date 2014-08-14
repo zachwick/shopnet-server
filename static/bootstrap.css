@@ -163,7 +163,7 @@
   width: auto;
   margin-top: 15px;
 }
-#app-container #map-container {
+#app-container #data-table-container {
   width: 66%;
   position: absolute;
   left: 5px;
@@ -171,6 +171,22 @@
   bottom: 5px;
   border: 1px solid black;
   border-radius: 2px;
+}
+#app-container #data-table-container .data-table {
+  font-size: 13;
+}
+#app-container #data-table-container .data-table thead {
+  font-weight: bold;
+}
+#app-container #data-table-container .data-table tr {
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+#app-container #data-table-container .data-table tr td {
+  text-align: center;
+}
+#app-container #data-table-container .data-table tr .datapoint-timestamp {
+  width: 116px;
 }
 #login-container #login-form-wrapper {
   width: 40%;

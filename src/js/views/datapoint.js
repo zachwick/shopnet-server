@@ -11,7 +11,7 @@
 
 var DatapointView = Backbone.View.extend({
 	// DatapointView DOM elements are div's.
-	tagName: "div",
+	tagName: "tr",
 
 	// DatapointView's deal with Datapoint models. This makes sense.
 	model: Datapoint,

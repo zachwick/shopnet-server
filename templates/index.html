@@ -2,7 +2,24 @@
 
 <script type="text/template" id="app-template">
   <div id="modal-background"></div>
-  <div id="map-container"></div>
+  <div id="data-table-container">
+	<table class="data-table">
+	  <thead>
+		<tr>
+		  <td class="datapoint-timestamp">Timestamp</td>
+		  <td class="datapoint-timestamp">Temp (F)</td>
+		  <td class="datapoint-ambtemp">Amb Temp (F)</td>
+		  <td class="datapoint-pipetemp">Pipe Temp (F)</td>
+		  <td class="datapoint-humidity">Humidity (%)</td>
+		  <td class="datapoint-methane">Methane (%)</td>
+		  <td class="datapoint-co2">CO2 (%)</td>
+		</tr>
+	  </thead>
+	  <tbody class="data-table-tbody">
+
+	  </tbody>
+	</table>
+  </div>
   <div id="toolbar-container" class="<%= privilege == 2 ? 'four-wide' : 'three-wide' %>">
 	<span class="logout-button">&#9032;</span>
 	<span class="add-site-button has-l-border has-r-border">Site++</span>
@@ -69,29 +86,13 @@
 </script>
 
 <script type="text/template" id="datapoint-template">
-  <div class="datapoint-timestamp">
-	<span class="label">Time: </span>
-	<span class="value"><%= timestamp %></span>
-  </div>
-  <div class="datapoint-location">
-	<span class="value"><%= "[" + lat + ", " + lon + "]" %></span>
-  </div>
-  <div class="datapoint-throttle">
-	<span class="label">Throttle: </span>
-	<span class="value"><%= throttle %></span>
-  </div>
-  <div class="datapoint-rpm">
-	<span class="label">RPM: </span>
-	<span class="value"><%= rpm %></span>	
-  </div>
-  <div class="datapoint-fuel">
-	<span class="label">Fuel Level: </span>
-	<span class="value"><%= fuel %></span>
-  </div>
-  <div class="datapoint-maf">
-	<span class="label">Mass Air Flow: </span>
-	<span class="value"><%= maf %></span>
-  </div>
+  <td class="datapoint-timestamp"><%= timestamp %></td>
+  <td class="datapoint-temp"><%= temp %></td>
+  <td class="datapoint-ambtemp"><%= amb_temp %></td>
+  <td class="datapoint-pipetemp"><%= pipe_temp %></td>
+  <td class="datapoint-humidity"><%= humidity %></td>
+  <td class="datapoint-methane"><%= methane %></td>
+  <td class="datapoint-co2"><%= co2 %></td>
 </script>
 
 <script src="/static/Dossier.js"></script>

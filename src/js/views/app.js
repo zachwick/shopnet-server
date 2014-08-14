@@ -114,7 +114,29 @@ var AppView = Backbone.View.extend({
 	// This method populates the data table with all of the selected nodes'
 	// data
 	populateDataTable: function() {
-		console.log("POPULATING");
+		this.$(".data-table-tbody").empty();
+
+		this.sites.each(_.bind(function(site) {
+			if (site.get("display")) {
+				if (site.get("nodes").length) {
+					site.get("nodes").each(_.bind(function(node) {
+						if (node.get("display")) {
+							if (node.get("datapoints").length && typeof node.get("datapoints").each !== "undefined") {
+								node.get("datapoints").each(this.addDataTableEntry, this);
+							}
+						}
+					},this));
+				}
+			}
+		},this));
+	},
+
+	// This method takes a Datapoint model and creates the corresponding data
+	// table record.
+	addDataTableEntry: function(datapoint) {
+		var view = new DatapointView({ model: datapoint });
+		// TODO: use jQuery to add the new DatapointView to the data table
+		this.$(".data-table-tbody").append(view.render().el);
 	},
 
 	// This method is the access point of all DOM manipulation by the
