@@ -226,6 +226,7 @@ class SingleNode:
                         "amb_temp": datapoint.amb_temp,
                         "pipe_temp": datapoint.pipe_temp,
                         "humidity": datapoint.humidity,
+                        "vbatt": datapoint.vbatt,
                         "timestamp": str(datapoint.timestamp)
                     })
                 data.append({

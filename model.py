@@ -67,6 +67,7 @@ def new_datapoint(data):
     pipe_temp = data['pipe_temp']
     humidity = data['humidity']
     timestamp = data['timestamp']
+    vbatt = data['vbatt']
 
     new_id = db.insert ("Datapoint",
                         node_id=node_id,
@@ -77,6 +78,7 @@ def new_datapoint(data):
                         amb_temp=amb_temp,
                         pipe_temp=pipe_temp,
                         humidity=humidity,
+                        vbatt=vbatt,
                         timestamp=timestamp)
 
     return new_id

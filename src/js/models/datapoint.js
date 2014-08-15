@@ -32,7 +32,10 @@ var Datapoint = Backbone.RelationalModel.extend({
 		humidity: 0.00,
 
 		// Timestamp
-		timestamp: 0
+		timestamp: 0,
+
+		// Battery Voltage
+		vbatt: 0
 	},
 
 	// The REST API endpoint for Datapoint objects is at the URI fragment
