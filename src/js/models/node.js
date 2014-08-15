@@ -27,6 +27,9 @@ var Node = Backbone.RelationalModel.extend({
 		// Unique identifier for each Node object
 		id: "",
 		
+		// ID/label that is unique to the well head at a particular site
+		well_id: "",
+
 		// A key to a "Site" object unique identifier
 		site_id: "",
 

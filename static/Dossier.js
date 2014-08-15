@@ -14291,6 +14291,9 @@ var Node = Backbone.RelationalModel.extend({
 		// Unique identifier for each Node object
 		id: "",
 		
+		// ID/label that is unique to the well head at a particular site
+		well_id: "",
+
 		// A key to a "Site" object unique identifier
 		site_id: "",
 
@@ -14626,7 +14629,7 @@ var DatapointView = Backbone.View.extend({
 
 	// Create and manipulate the DOM to create and display the DatapointView.
 	render: function() {
-		this.$el.html (this.template()(this.model.toJSON()));
+		this.$el.html (this.template()(_.extend(this.model.toJSON(),{ well_id: (this.model.get("node_id")).get("well_id")})));
 		return this;
 	}
 });

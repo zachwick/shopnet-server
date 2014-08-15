@@ -233,6 +233,7 @@ class SingleNode:
                     "lat": node.lat,
                     "lon": node.lon,
                     "macaddr": node.macaddr,
+                    "well_id": node.well_id,
                     "datapoints": datapoints,
                 })
 
@@ -280,7 +281,9 @@ class SingleNode:
             # TODO: Other node values here
             "id":  data['id'],
             "lat": data['lat'],
-            "lon": data['lon']
+            "lon": data['lon'],
+            "macaddr": data['macaddr'],
+            "well_id": data['well_id']
         }]
 
         '''
@@ -322,7 +325,8 @@ class SingleSite:
                     "id": node.id,
                     "lat": node.lat,
                     "lon": node.lon,
-                    "macaddr": node.macaddr
+                    "macaddr": node.macaddr,
+                    "well_id": node.well_id
                 })
 
             data.append({

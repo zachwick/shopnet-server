@@ -40,6 +40,7 @@ def new_node(data):
     print("\n\n\n SET SITE_ID \n\n\n")
     new_id = db.insert("Node",
                        macaddr=data['macaddr'],
+                       well_id=data['well_id'],
                        lat=data['lat'],
                        lon=data['lon'],
                        site_id=data['site_id'])
