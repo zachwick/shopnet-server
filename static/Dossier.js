@@ -14350,7 +14350,7 @@ var Site = Backbone.RelationalModel.extend({
 			// You need to be careful with includeInJSON so that when
 			// you try and serialize a "Site" object with children to
 			// a JSON string, you don't get a cyclic reference.
-			includeInJSON: false
+			includeInJSON: "id"
 		}
 	}],
 	defaults: {
@@ -14559,6 +14559,14 @@ var AppView = Backbone.View.extend({
 		e.preventDefault();
 
 		// Create the new Node model
+		var newNode = new Node({
+			well_id: this.$("input[name='well_id']").val(),
+			macaddr: this.$("input[name='macaddr']").val(),
+			site_id: this.$("select[name='site_id']").val()
+		});
+		console.log(newNode);
+		newNode.save();
+		this.closeModal();
 	},
 
 	// Add a new site to the database

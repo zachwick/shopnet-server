@@ -20,7 +20,7 @@ var Site = Backbone.RelationalModel.extend({
 			// You need to be careful with includeInJSON so that when
 			// you try and serialize a "Site" object with children to
 			// a JSON string, you don't get a cyclic reference.
-			includeInJSON: false
+			includeInJSON: "id"
 		}
 	}],
 	defaults: {

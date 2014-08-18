@@ -213,6 +213,24 @@ class Logout:
         session.login = 0
         web.seeother("/")
 
+class Nodes:
+    def PUT(self):
+        data = json.loads(web.data())
+        new_id = model.new_node(data)
+        data = [{
+            "macaddr": data['macaddr'],
+            "well_id": data['well_id'],
+            "site_id": data['site_id'],
+            "id": new_id,
+            "lat": data['lat'],
+            "lon": data['lon']
+        }]
+
+        web.header("Content-Type","application/json")
+        web.header("Cache-Control","no-cache")
+        return json.dumps(data) 
+
+
 class SingleNode:
     def GET(self, id):
         '''
@@ -254,14 +272,14 @@ class SingleNode:
                         "vbatt": datapoint.vbatt,
                         "timestamp": str(datapoint.timestamp)
                     })
-                data.append({
-                    "id": id,
-                    "lat": node.lat,
-                    "lon": node.lon,
-                    "macaddr": node.macaddr,
-                    "well_id": node.well_id,
-                    "datapoints": datapoints,
-                })
+            data.append({
+                "id": id,
+                "lat": node.lat,
+                "lon": node.lon,
+                "macaddr": node.macaddr,
+                "well_id": node.well_id,
+                "datapoints": datapoints,
+            })
 
         '''
         Ensure that the response headers are correct. Told you that you would
@@ -422,11 +440,6 @@ class Sites:
         web.header("Content-Type", "application/json")
         web.header("Cache-Control", "no-cache")
         return json.dumps(data)
-
-class Nodes:
-    def GET(self):
-        # UNUSED
-        pass
 
 class Datapoints:
     def POST(self):

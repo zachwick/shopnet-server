@@ -37,7 +37,6 @@ def get_nodes_for_site(site_id):
     return db.select ("Node", where="site_id=$site_id", vars=locals())
 
 def new_node(data):
-    print("\n\n\n SET SITE_ID \n\n\n")
     new_id = db.insert("Node",
                        macaddr=data['macaddr'],
                        well_id=data['well_id'],
