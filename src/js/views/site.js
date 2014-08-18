@@ -9,7 +9,7 @@ var SiteView = Backbone.View.extend({
 	// VehicleView DOM elements are "li" tags
 	tagName: "li",
 
-	// VehicleView's deal with Vehicle models.
+	// SiteView's deal with Site models.
 	// This is considered by all involved, a very smart thing.
 	model: Site,
 
@@ -82,8 +82,7 @@ var SiteView = Backbone.View.extend({
 		          "renderOneNode",
 		          "render",
 		          "toggleDisplaySite",
-		          "deleteSelf"
-		         );
+		          "deleteSelf"		         );
 	},
 
 	// In this method, we call SiteView.renderOneNode for each node that is

@@ -1,0 +1,63 @@
+\hypertarget{namespaceapp}{\section{app Namespace Reference}
+\label{namespaceapp}\index{app@{app}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classapp_1_1_datapoints}{Datapoints}
+\item 
+class \hyperlink{classapp_1_1_index}{Index}
+\item 
+class \hyperlink{classapp_1_1_login}{Login}
+\item 
+class \hyperlink{classapp_1_1_logout}{Logout}
+\item 
+class \hyperlink{classapp_1_1_nodes}{Nodes}
+\item 
+class \hyperlink{classapp_1_1_single_node}{Single\+Node}
+\item 
+class \hyperlink{classapp_1_1_single_site}{Single\+Site}
+\item 
+class \hyperlink{classapp_1_1_sites}{Sites}
+\item 
+class \hyperlink{classapp_1_1_users}{Users}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{namespaceapp_af502a6cc4eef7de60de488c3509f8300}{tuple {\bfseries urls}}\label{namespaceapp_af502a6cc4eef7de60de488c3509f8300}
+
+\item 
+\hypertarget{namespaceapp_a5296b2abdb32e25fbcb05aa72cc9f45f}{tuple {\bfseries render} = web.\+template.\+render(\char`\"{}templates\char`\"{},base=\char`\"{}base\char`\"{})}\label{namespaceapp_a5296b2abdb32e25fbcb05aa72cc9f45f}
+
+\item 
+\hypertarget{namespaceapp_ad3afa162eb284cf3d0ed835917982bc9}{tuple {\bfseries app} = web.\+application(urls, globals())}\label{namespaceapp_ad3afa162eb284cf3d0ed835917982bc9}
+
+\item 
+\hypertarget{namespaceapp_a04420db5351f8035f19ebd43f9c887c7}{tuple {\bfseries store} = web.\+session.\+Disk\+Store('sessions')}\label{namespaceapp_a04420db5351f8035f19ebd43f9c887c7}
+
+\item 
+tuple {\bfseries session}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}The main server application
+This file sets the URL routes and handles all HTTP requests
+
+Copyright 2014 zachwick <zach@zachwick.com>
+Licensed under the AGPLv3 or later\end{DoxyVerb}
+ 
+
+\subsection{Variable Documentation}
+\hypertarget{namespaceapp_acfce2e9f97f56c1bbe2b384796d8194a}{\index{app@{app}!session@{session}}
+\index{session@{session}!app@{app}}
+\subsubsection[{session}]{\setlength{\rightskip}{0pt plus 5cm}tuple app.\+session}}\label{namespaceapp_acfce2e9f97f56c1bbe2b384796d8194a}
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+1 = web.session.Session(app, store,
+2                               initializer=\{\textcolor{stringliteral}{"login"}:0, 
+3                                            \textcolor{stringliteral}{"privilege"}:0,
+4                                            \textcolor{stringliteral}{"username"}:\textcolor{stringliteral}{""},
+5                                            \textcolor{stringliteral}{"id"}:0\})
+\end{DoxyCode}
