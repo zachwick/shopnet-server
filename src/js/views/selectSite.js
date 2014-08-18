@@ -7,7 +7,7 @@
  */
 
 // The SelectSiteView is each option in the HTML select tag where the
-// user picks the site that the data file to upload corresponds to.
+// user picks the site that the Node being added corresponds to.
 
 var SelectSiteView = Backbone.View.extend({
 	// The SelectSiteView DOM element is an "option" HTML tag
@@ -21,7 +21,7 @@ var SelectSiteView = Backbone.View.extend({
 	model: Site,
 
 	// A convenience wrapper around the UnderscoreJS template function.
-	// The template for the SelectSiteView can be found in /templates/intex.html
+	// The template for the SelectSiteView can be found in /templates/index.html
 	template: function() {
 		return _.template($("#select-site-template").html());
 	},
@@ -35,7 +35,7 @@ var SelectSiteView = Backbone.View.extend({
 		// and display it.
 	},
 
-	// Create the SelectSiteView DOM elements based on the vehicle model and
+	// Create the SelectSiteView DOM elements based on the Site model and
 	// the HTML template.
 	render: function() {
 		this.$el.html (this.template()(this.model.toJSON()));

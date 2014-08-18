@@ -15,6 +15,8 @@ var AppView = Backbone.View.extend({
 		'click .logout-button': 'doLogout',
 		'submit #add-site-form': 'newSite',
 		'submit #add-user-form': 'newUser',
+		'submit #add-node-form': 'newNode',
+		'click .add-node-button': 'showAddNodeModal',
 		'click .add-site-button': 'showAddSiteModal',
 		'click .add-user-button': 'showAddUserModal',
 		'click .x-button': 'closeModal'
@@ -28,6 +30,11 @@ var AppView = Backbone.View.extend({
 		this.$("#modal-background").hide();
 		// Hide any visible modal-wrapper divs
 		this.$(".modal-wrapper:visible").hide();
+	},
+
+	showAddNodeModal: function(e) {
+		this.$("#modal-background").show();
+		this.$("#add-node-modal").show();
 	},
 
 	showAddSiteModal: function(e) {
@@ -75,13 +82,32 @@ var AppView = Backbone.View.extend({
 		_.bindAll(this,
 		          "addOneSite",
 		          "addAllSites",
+		          "createUserSelect",
 		          "newSite",
+		          "newNode",
 		          "populateDataTable",
 		          "render",
+		          "showAddNodeModal",
 		          "showAddSiteModal",
 		          "showAddUserModal",
 		          "closeModal"
 		         );
+	},
+
+	createUserSelect: function() {
+		if (this.user.get("privilege") == 2) {
+			// Fetch a list of all user's (email, id) combinations
+			this.users = new Users();
+			this.users.fetch({
+				success: _.bind(function(model, response, jqXHR) {
+					this.$(".select_user").empty();
+					_.each(model.models,_.bind(function(user) {
+						var selectUser = new SelectUserView({ model: user });
+						this.$(".select_user").append(selectUser.render().el);
+					}, this));
+				}, this)
+			});
+		}
 	},
 
 	// Create a new SiteView and add it to the displayed list of sites
@@ -89,6 +115,10 @@ var AppView = Backbone.View.extend({
 	addOneSite: function(site) {
 		var view = new SiteView({ model: site });
 		this.$("#site-list").append(view.render().el);
+
+		// Create and add the selectSite view for this site
+		var selectView = new SelectSiteView({ model: site });
+		this.$(".add-node-site-select").append(selectView.render().el);
 	},
 
 	// Create a new SiteView for each Site model in our sites
@@ -112,6 +142,14 @@ var AppView = Backbone.View.extend({
 		}
 
 		this.closeModal();
+	},
+
+	// Add a new node to the database
+	newNode: function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		// Create the new Node model
 	},
 
 	// Add a new site to the database
@@ -175,7 +213,9 @@ var AppView = Backbone.View.extend({
 	// This method is the access point of all DOM manipulation by the
 	// AppView object
 	render: function() {
-		this.$el.html(this.template()({privilege: this.user.get("privilege")}));
+		this.$el.html(this.template()({privilege: this.user.get("privilege"),
+		                              user_id: this.user.get("id")}));
 		this.addAllSites();
+		this.createUserSelect();
 	}
 });

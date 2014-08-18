@@ -23,12 +23,12 @@
 	</table>
   </div>
   <div id="toolbar-container" class="<%= privilege == 2 ? 'four-wide' : 'three-wide' %>">
-	<span class="logout-button">&#9032;</span>
-	<span class="add-site-button has-l-border has-r-border">Site++</span>
+	<span class="logout-button has-l-border">&#9032;</span>
+	<span class="add-node-button">Node++</span>
+	<span class="add-site-button has-r-border">Site++</span>
 	<% if (privilege == 2) { %>
-	  <span class="add-user-button has-l-border">User++</span>
+	  <span class="add-user-button has-r-border">User++</span>
 	<% } %>
-	  <span class="upload-datafile-button">Upload</span>
   </div>
   <ul id="site-list"></ul>
   <div id="add-user-modal" class="modal-wrapper">
@@ -50,23 +50,37 @@
 	  <span class="add-site-header">Add Site</span>
 	  <span class="x-button">X</span>
 	  <form id="add-site-form">
-		<input type="text" name="name" placeholder="Example Name"></input>
+		<input type="text" name="name" placeholder="Site Name"></input>
+		<% if (privilege == 2) { %>
+		   <select  name="user_id" class="select_user"></select>
+		<% } else { %>
+		   <input type="hidden" name="user_id" value="<%= user_id %>"></input>
+		<% } %>
 		<input type="submit" value="Add New Site"></input>
 	  </form>
   </div>
-  <div id="upload-data-modal" class="modal-wrapper">
-	<span class="upload-data-header">Upload Data File</span>
+  <div id="add-node-modal" class="modal-wrapper">
+	<span class="add-node-header">Add Node</span>
 	<span class="x-button">X</span>
-	<form id="upload-file-form" method="POST"
-		  enctype="multipart/form-data" action="/upload/">
-	  <input type="file" name="inputFile" class="input-file">
-	  <input type="submit" value="Upload" class="upload-submit">
+	<form id="add-node-form">
+	  <input type="text" name="macaddr" class="node-macaddr"
+	  placeholder="MAC Address"></input>
+	  <input type="text" name="well_id" class="node-wellid"
+	  placeholder="Well ID"></input>
+	  <select name="site_id" class="add-node-site-select">
+
+	  </select>
+	  <input type="submit" value="Add New Node"></input>
 	</form>
   </div>
 </script>
 
 <script type="text/template" id="select-site-template">
   <%= name %>
+</script>
+
+<script type="text/template" id="select-user-template">
+  <%= email %>
 </script>
 
 <script type="text/template" id="site-template">

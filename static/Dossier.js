@@ -14402,6 +14402,10 @@ var User = Backbone.RelationalModel.extend({
 	urlRoot: '/users/'
 });
 
+var Users = Backbone.Collection.extend({
+	model: User,
+	url: '/allusers/'
+});
 
 var AppView = Backbone.View.extend({
 	// A Sizzle/jQuery selector for the DOM element that an AppView object
@@ -14420,6 +14424,8 @@ var AppView = Backbone.View.extend({
 		'click .logout-button': 'doLogout',
 		'submit #add-site-form': 'newSite',
 		'submit #add-user-form': 'newUser',
+		'submit #add-node-form': 'newNode',
+		'click .add-node-button': 'showAddNodeModal',
 		'click .add-site-button': 'showAddSiteModal',
 		'click .add-user-button': 'showAddUserModal',
 		'click .x-button': 'closeModal'
@@ -14433,6 +14439,11 @@ var AppView = Backbone.View.extend({
 		this.$("#modal-background").hide();
 		// Hide any visible modal-wrapper divs
 		this.$(".modal-wrapper:visible").hide();
+	},
+
+	showAddNodeModal: function(e) {
+		this.$("#modal-background").show();
+		this.$("#add-node-modal").show();
 	},
 
 	showAddSiteModal: function(e) {
@@ -14480,13 +14491,32 @@ var AppView = Backbone.View.extend({
 		_.bindAll(this,
 		          "addOneSite",
 		          "addAllSites",
+		          "createUserSelect",
 		          "newSite",
+		          "newNode",
 		          "populateDataTable",
 		          "render",
+		          "showAddNodeModal",
 		          "showAddSiteModal",
 		          "showAddUserModal",
 		          "closeModal"
 		         );
+	},
+
+	createUserSelect: function() {
+		if (this.user.get("privilege") == 2) {
+			// Fetch a list of all user's (email, id) combinations
+			this.users = new Users();
+			this.users.fetch({
+				success: _.bind(function(model, response, jqXHR) {
+					this.$(".select_user").empty();
+					_.each(model.models,_.bind(function(user) {
+						var selectUser = new SelectUserView({ model: user });
+						this.$(".select_user").append(selectUser.render().el);
+					}, this));
+				}, this)
+			});
+		}
 	},
 
 	// Create a new SiteView and add it to the displayed list of sites
@@ -14494,6 +14524,10 @@ var AppView = Backbone.View.extend({
 	addOneSite: function(site) {
 		var view = new SiteView({ model: site });
 		this.$("#site-list").append(view.render().el);
+
+		// Create and add the selectSite view for this site
+		var selectView = new SelectSiteView({ model: site });
+		this.$(".add-node-site-select").append(selectView.render().el);
 	},
 
 	// Create a new SiteView for each Site model in our sites
@@ -14517,6 +14551,14 @@ var AppView = Backbone.View.extend({
 		}
 
 		this.closeModal();
+	},
+
+	// Add a new node to the database
+	newNode: function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		// Create the new Node model
 	},
 
 	// Add a new site to the database
@@ -14580,8 +14622,10 @@ var AppView = Backbone.View.extend({
 	// This method is the access point of all DOM manipulation by the
 	// AppView object
 	render: function() {
-		this.$el.html(this.template()({privilege: this.user.get("privilege")}));
+		this.$el.html(this.template()({privilege: this.user.get("privilege"),
+		                              user_id: this.user.get("id")}));
 		this.addAllSites();
+		this.createUserSelect();
 	}
 });
 
@@ -14704,7 +14748,7 @@ var NodeView = Backbone.View.extend({
  */
 
 // The SelectSiteView is each option in the HTML select tag where the
-// user picks the site that the data file to upload corresponds to.
+// user picks the site that the Node being added corresponds to.
 
 var SelectSiteView = Backbone.View.extend({
 	// The SelectSiteView DOM element is an "option" HTML tag
@@ -14718,7 +14762,7 @@ var SelectSiteView = Backbone.View.extend({
 	model: Site,
 
 	// A convenience wrapper around the UnderscoreJS template function.
-	// The template for the SelectSiteView can be found in /templates/intex.html
+	// The template for the SelectSiteView can be found in /templates/index.html
 	template: function() {
 		return _.template($("#select-site-template").html());
 	},
@@ -14732,11 +14776,52 @@ var SelectSiteView = Backbone.View.extend({
 		// and display it.
 	},
 
-	// Create the SelectSiteView DOM elements based on the vehicle model and
+	// Create the SelectSiteView DOM elements based on the Site model and
 	// the HTML template.
 	render: function() {
 		this.$el.html (this.template()(this.model.toJSON()));
 		this.$el.attr("value",this.model.get("id"));
+		return this;
+	}
+});
+
+/**
+ * SelectUser BackboneJS view for Dossier
+ *
+ * Copyright 2014 zachwick <zach@zachwick.com>
+ * Licensed under the AGPLv3 or later
+ **/
+
+// The SelectUserView is used for each option in the HTML select tag where the
+// user picks which the User that the newly created Site belongs to.
+
+var SelectUserView = Backbone.View.extend({
+	// The SelectUserView DOM element is an "option" HTML tag
+	tagName: "option",
+
+	// SelectUserView's deal with User models. This is for the same reason that
+	// SelectSiteView's deal with Site models.
+	model: User,
+
+	// A convenience wrapper around the UnderscoreJS template function.
+	// The template for the SelectUserView can be found in /templates/index.html
+	template: function() {
+		return _.template($("#select-user-template").html());
+	},
+
+	// This method is called every time that we create a new SelectUserView
+	// object. This should be a very familiar construct by now.
+	initialize: function() {
+		// The SelectUserView is not much more than an automagically created
+		// option tag, so we don't need to do anything special with it other
+		// than create and display it.
+	},
+
+	// Create the SelectUserView DOM elements based on the User model and
+	// the HTML template.
+	render: function() {
+		this.$el.html (this.template()(this.model.toJSON()));
+		this.$el.attr("value", this.model.get("id"));
 		return this;
 	}
 });

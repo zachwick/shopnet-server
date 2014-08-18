@@ -96,6 +96,9 @@ def new_datapoint(data):
 
 ### User DB/Table Methods
 
+def get_users():
+    return db.select ("User", order="id")
+
 def new_user(data):
     username  = data['username']
     email     = data['email']

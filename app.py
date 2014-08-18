@@ -45,6 +45,10 @@ urls = (
     # The API endpoint for creating, modifying, and/or deleting users
     '/users/',                          'Users',
 
+    # This API endpoint if for listing all user records in the DB and is
+    # only available to users with a privilege level of 2
+    '/allusers/',                       'AllUsers',
+
     # This API endpoint is for interacting with a single WSN node identified by
     # the supplied id.
     # NB: This 'id' is the database id, not the BackboneJS model's cid property.
@@ -154,6 +158,27 @@ class Users:
         web.header("Content-Type", "application/json")
         web.header("Cache-Control", "no-cache")
         return json.dumps(data)
+
+class AllUsers:
+    def GET(self):
+        '''
+        Get a list of _all_ users that exist in the DB.
+        This method is only available to the super admin user
+        '''
+        if session.privilege == 2:
+            self.users = model.get_users()
+            data = []
+            for user in self.users:
+                data.append({
+                    "email": user.email,
+                    "id": user.id,
+                    "username": user.username,
+                    "privilege": user.privilege
+                })
+            
+            web.header("Content-Type", "application/json")
+            web.header("Cache-Control", "no-cache")
+            return json.dumps(data)
 
 class Login:
     def POST(self):

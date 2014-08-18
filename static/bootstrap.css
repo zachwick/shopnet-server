@@ -151,16 +151,16 @@
   width: auto;
   margin-top: 15px;
 }
-#app-container .modal-wrapper #upload-file-form {
+#app-container .modal-wrapper #add-node-form {
   position: relative;
   padding: 3px 0px;
   text-align: center;
 }
-#app-container .modal-wrapper #upload-file-form input {
+#app-container .modal-wrapper #add-node-form input {
   width: auto;
   margin-top: 3px;
 }
-#app-container .modal-wrapper #upload-file-form input[type="submit"] {
+#app-container .modal-wrapper #add-node-form input[type="submit"] {
   background: none;
   border: 1px solid black;
   width: auto;

@@ -28,3 +28,7 @@ var User = Backbone.RelationalModel.extend({
 	urlRoot: '/users/'
 });
 
+var Users = Backbone.Collection.extend({
+	model: User,
+	url: '/allusers/'
+});
