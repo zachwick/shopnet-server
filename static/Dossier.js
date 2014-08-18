@@ -14567,9 +14567,16 @@ var AppView = Backbone.View.extend({
 	newSite: function(e) {
 		e.stopPropagation();
 		e.preventDefault();
+		
+		if (this.user.get("privilege") == 2) {
+			var user_id = this.$("select[name='user_id']").val();
+		} else {
+			var user_id = this.$("input[name='user_id']").val();
+		}
 
 		var newSite = new Site({
-			name: this.$("input[name='name']").val()
+			name: this.$("input[name='name']").val(),
+			user_id: user_id
 		});
 
 		this.closeModal();
@@ -14582,7 +14589,7 @@ var AppView = Backbone.View.extend({
 			newSite.save({},{
 				// The 'success' handler only fires on non-error codes
 				success: _.bind(function(model,response,collection) {
-					// Simply adding the new Vehicle model to our collection
+					// Simply adding the new Site model to our collection
 					// is enough because then the event bindings that were
 					// defined in AppView.initialize take over
 					this.sites.add(model);

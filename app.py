@@ -412,7 +412,7 @@ class Sites:
         Add a new site
         '''
         data = json.loads(web.data())
-        data['user_id'] = session.id
+        #data['user_id'] = session.id
         new_id = model.new_site(data)
         data = [{
             "id": new_id,
