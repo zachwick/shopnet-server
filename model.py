@@ -58,7 +58,18 @@ def get_datapoints_for_node(node_id):
     return db.select ("Datapoint", where="node_id=$node_id", vars=locals())
 
 def new_datapoint(data):
-    node_id  = data['node_id']
+    macaddr  = data['macaddr']
+    '''
+    Get the node_id that corresponds to the given macaddr
+    '''
+    node_id_list  = db.select ("Node", where="macaddr=$macaddr",vars=locals())
+    node_id  = node_id_list[0]
+
+    '''
+    db.select returns a list, so make sure that we are only using the first
+    element from that list - which should only ever have a single element.
+    '''
+
     methane  = data['methane']
     co2      = data['co2']
     temp     = data['temp']

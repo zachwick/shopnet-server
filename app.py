@@ -69,7 +69,7 @@ urls = (
 
     # This API endpoint is for either GET-ting all datapoints, or POST-ing a new
     # datapoint only.
-    #'/datapoints/',                     'Datapoints',
+    '/datapoints/',                     'Datapoints',
 )
 
 '''
@@ -402,6 +402,18 @@ class Nodes:
     def GET(self):
         # UNUSED
         pass
+
+class Datapoints:
+    def POST(self):
+        '''
+        Add a new datapoint from the Coordinator/Gateway
+        '''
+        data = json.loads(web.data())
+        new_id = model.new_datapoint(data)
+        '''
+        We don't really care about returning anything to the
+        coordinator/gateway, so don't do any kind of returning
+        '''
     
 if __name__ == '__main__':
     app.run()
