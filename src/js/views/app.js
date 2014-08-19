@@ -142,6 +142,7 @@ var AppView = Backbone.View.extend({
 		}
 
 		this.closeModal();
+		this.render();
 	},
 
 	// Add a new node to the database
@@ -155,7 +156,6 @@ var AppView = Backbone.View.extend({
 			macaddr: this.$("input[name='macaddr']").val(),
 			site_id: this.$("select[name='site_id']").val()
 		});
-		console.log(newNode);
 		newNode.save();
 		this.closeModal();
 	},

@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>node.js</title>
+  <title>selectUser.js</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
   <link rel="stylesheet" media="all" href="docco.css" />
@@ -56,7 +56,7 @@
         
           <li id="title">
               <div class="annotation">
-                  <h1>node.js</h1>
+                  <h1>selectUser.js</h1>
               </div>
           </li>
         
@@ -72,14 +72,11 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-comment">/**
- * Node BackboneJS view for Dossier
+ * SelectUser BackboneJS view for Dossier
  *
  * Copyright 2014 zachwick &lt;zach@zachwick.com&gt;
  * Licensed under the AGPLv3 or later
- *
- */</span>
-
-<span class="hljs-keyword">var</span> NodeView = Backbone.View.extend({</pre></div></div>
+ **/</span></pre></div></div>
             
         </li>
         
@@ -90,11 +87,13 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>NodeView DOM elements are ‘li’ tags.</p>
+              <p>The SelectUserView is used for each option in the HTML select tag where the
+user picks which the User that the newly created Site belongs to.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	tagName: <span class="hljs-string">"li"</span>,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-keyword">var</span> SelectUserView = Backbone.View.extend({</pre></div></div>
             
         </li>
         
@@ -105,11 +104,11 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>The NodeView object deals with Node models.</p>
+              <p>The SelectUserView DOM element is an “option” HTML tag</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	model: Node,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	tagName: <span class="hljs-string">"option"</span>,</pre></div></div>
             
         </li>
         
@@ -120,13 +119,12 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>An easy to use wrapper around the Underscore template function.</p>
+              <p>SelectUserView’s deal with User models. This is for the same reason that
+SelectSiteView’s deal with Site models.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	template: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-		<span class="hljs-keyword">return</span> _.template($(<span class="hljs-string">"#node-template"</span>).html());
-	},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>	model: User,</pre></div></div>
             
         </li>
         
@@ -137,12 +135,13 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Binding UI events that we care about to NodeView methods</p>
+              <p>A convenience wrapper around the UnderscoreJS template function.
+The template for the SelectUserView can be found in /templates/index.html</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>	events: {
-		<span class="hljs-string">"click .node-display"</span>: <span class="hljs-string">"toggleDisplayNode"</span>
+            <div class="content"><div class='highlight'><pre>	template: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
+		<span class="hljs-keyword">return</span> _.template($(<span class="hljs-string">"#select-user-template"</span>).html());
 	},</pre></div></div>
             
         </li>
@@ -154,8 +153,8 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>The NodeView.initialize method is called whenever we create a new
-NodeView object. You can think of if like a C++ constructor.</p>
+              <p>This method is called every time that we create a new SelectUserView
+object. This should be a very familiar construct by now.</p>
 
             </div>
             
@@ -170,9 +169,9 @@ NodeView object. You can think of if like a C++ constructor.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>We don’t do a whole lot with this view since Nodes are kind of
-an artificial construct anyway which only exist to have a default
-grouping of Datapoints that correspond to a Site.</p>
+              <p>The SelectUserView is not much more than an automagically created
+option tag, so we don’t need to do anything special with it other
+than create and display it.</p>
 
             </div>
             
@@ -187,42 +186,14 @@ grouping of Datapoints that correspond to a Site.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-              <p>This method is called any time that the .node-display checkbox is clicked
-If the box is checked, we get all of the Datapoint child nodes for this
-node. If the box is not checked, we don’t fetch anything. In either case
-we call the AppView.populateDataTable method in order to create table
-records.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>	toggleDisplayNode: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(e)</span> {</span>
-		<span class="hljs-keyword">this</span>.model.set({ display: <span class="hljs-keyword">this</span>.$(<span class="hljs-string">"input[name='node-display']"</span>).is(<span class="hljs-string">":checked"</span>) });
-		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">"display"</span>)) {
-			<span class="hljs-keyword">this</span>.model.fetch({
-				success: _.bind(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(model, response, jqXHR)</span> {</span>
-					App.populateDataTable();
-				},<span class="hljs-keyword">this</span>)
-			});
-		} <span class="hljs-keyword">else</span> {
-			App.populateDataTable();
-		}
-	},</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-9">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-9">&#182;</a>
-              </div>
-              <p>Create/Manipulate the DOM in order to create and display the TripView.</p>
+              <p>Create the SelectUserView DOM elements based on the User model and
+the HTML template.</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>	render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
 		<span class="hljs-keyword">this</span>.$el.html (<span class="hljs-keyword">this</span>.template()(<span class="hljs-keyword">this</span>.model.toJSON()));
+		<span class="hljs-keyword">this</span>.$el.attr(<span class="hljs-string">"value"</span>, <span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">"id"</span>));
 		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 	}
 });</pre></div></div>
