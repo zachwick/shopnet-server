@@ -14745,7 +14745,7 @@ var NodeView = Backbone.View.extend({
 		}
 	},
 
-	// Create/Manipulate the DOM in order to create and display the TripView.
+	// Create/Manipulate the DOM in order to create and display the NodeView.
 	render: function() {
 		this.$el.html (this.template()(this.model.toJSON()));
 		return this;
