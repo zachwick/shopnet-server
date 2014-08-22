@@ -56,8 +56,6 @@ var AppView = Backbone.View.extend({
 	// This AppView.initialize function is called whenever we create a new
 	// AppView object; Think of it kind of like a C++ constructor.
 	initialize: function(options) {
-		// The a Backbone collection of Vehicle models
-		//this.vehicles = new Vehicles();
 		this.sites = new Sites();
 
 		this.user = new User();
@@ -161,7 +159,7 @@ var AppView = Backbone.View.extend({
 	},
 
 	// Add a new site to the database
-	// @param e - the Event object that triggered AppView.newVehicle being
+	// @param e - the Event object that triggered AppView.newSite being
 	//            called.
 	newSite: function(e) {
 		e.stopPropagation();
@@ -184,7 +182,7 @@ var AppView = Backbone.View.extend({
 		// TODO: implement some kind of error messaging.
 		if (newSite.get("name") != "") {
 
-			// This is the actual AJAX request that saves the new Vehicle
+			// This is the actual AJAX request that saves the new Site
 			newSite.save({},{
 				// The 'success' handler only fires on non-error codes
 				success: _.bind(function(model,response,collection) {

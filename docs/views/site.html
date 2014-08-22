@@ -89,7 +89,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>VehicleView DOM elements are “li” tags</p>
+              <p>SiteView DOM elements are “li” tags</p>
 
             </div>
             
@@ -204,7 +204,7 @@ site list.
 The actual opening/closing is done by changing the “display” attribute on
 the model. In the ‘initialize’ method for this view, we bind the ‘render’
 method to any change event on any of the model’s attributes. This has the
-effect of re-rendering the VehicleView when we change the “display”
+effect of re-rendering the SiteView when we change the “display”
 attribute. In the template for the SiteView, there is a ternary clause
 around the “display” that toggles a CSS class. This allows the user’s 
 browser to use its CSS rendering to do the visual change instead of its 
@@ -231,7 +231,7 @@ javascript engine - this results in better performance.</p>
                 <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
               <p>This SiteView.initialize function is called whenever we create a new
-VehicleView object; Think of it kind of like a C++ constructor.</p>
+SiteView object; Think of it kind of like a C++ constructor.</p>
 
             </div>
             
@@ -247,7 +247,7 @@ VehicleView object; Think of it kind of like a C++ constructor.</p>
                 <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
               <p>Any time that any attribute of this view’s model changes, call the
-VehicleView.render method.</p>
+SiteView.render method.</p>
 
             </div>
             
@@ -279,7 +279,7 @@ jQuery. Look at the jQuery documentation for more info.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-              <p>Ensure that ‘this’ is bound correctly in each of the VehicleView’s
+              <p>Ensure that ‘this’ is bound correctly in each of the SiteView’s
 methods.</p>
 
             </div>
