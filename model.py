@@ -1,6 +1,6 @@
 import web
 
-db = web.database (dbn="mysql", db="dossier", user="root", passwd="Fritz")
+db = web.database (dbn="mysql", db="dossier", user="root", passwd="")
 
 ### Site DB/Table Methods
 
@@ -62,12 +62,14 @@ def new_datapoint(data):
     Get the node_id that corresponds to the given macaddr
     '''
     node_id_list  = db.select ("Node", where="macaddr=$macaddr",vars=locals())
-    node_id  = node_id_list[0]
+    for node in node_id_list:
+	node_id=node.id	
+    '''
+    db.select() returns a container.
+    Each line contains a dictionary that the db has returned.
+    Use var.value rather than var['value']. NR
+    '''	
 
-    '''
-    db.select returns a list, so make sure that we are only using the first
-    element from that list - which should only ever have a single element.
-    '''
 
     methane  = data['methane']
     co2      = data['co2']
