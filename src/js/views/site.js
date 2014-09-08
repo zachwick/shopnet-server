@@ -6,7 +6,7 @@
  **/
 
 var SiteView = Backbone.View.extend({
-	// VehicleView DOM elements are "li" tags
+	// SiteView DOM elements are "li" tags
 	tagName: "li",
 
 	// SiteView's deal with Site models.
@@ -49,7 +49,7 @@ var SiteView = Backbone.View.extend({
 	// The actual opening/closing is done by changing the "display" attribute on
 	// the model. In the 'initialize' method for this view, we bind the 'render'
 	// method to any change event on any of the model's attributes. This has the
-	// effect of re-rendering the VehicleView when we change the "display"
+	// effect of re-rendering the SiteView when we change the "display"
 	// attribute. In the template for the SiteView, there is a ternary clause
 	// around the "display" that toggles a CSS class. This allows the user's 
 	// browser to use its CSS rendering to do the visual change instead of its 
@@ -64,10 +64,10 @@ var SiteView = Backbone.View.extend({
 	},
 
 	// This SiteView.initialize function is called whenever we create a new
-	// VehicleView object; Think of it kind of like a C++ constructor.
+	// SiteView object; Think of it kind of like a C++ constructor.
 	initialize: function() {
 		// Any time that any attribute of this view's model changes, call the
-		// VehicleView.render method.
+		// SiteView.render method.
 		this.listenTo (this.model, "change", this.render);
 
 		// When the model for this view emits a "destroy" event (meaning that it
@@ -75,7 +75,7 @@ var SiteView = Backbone.View.extend({
 		// jQuery. Look at the jQuery documentation for more info.
 		this.listenTo (this.model, "destroy", this.remove);
 
-		// Ensure that 'this' is bound correctly in each of the VehicleView's
+		// Ensure that 'this' is bound correctly in each of the SiteView's
 		// methods.
 		_.bindAll(this,
 		          "renderNodes",
