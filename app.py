@@ -12,6 +12,7 @@ import model
 import json
 import csv
 import hashlib
+import datetime
 
 '''
  If web.config.debug is not explicitly set to False, sessions with not work.
@@ -219,7 +220,7 @@ class Nodes:
         new_id = model.new_node(data)
         data = [{
             "macaddr": data['macaddr'],
-            "well_id": data['well_id'],
+            "location": data['location'],
             "site_id": data['site_id'],
             "id": new_id,
             "lat": data['lat'],
@@ -262,14 +263,10 @@ class SingleNode:
                     datapoints.append({
                         "id": datapoint.id,
                         "node_id": datapoint.node_id,
-                        "methane": datapoint.methane,
-                        "co2": datapoint.co2,
                         "temp": datapoint.temp,
                         "pressure": datapoint.pressure,
-                        "amb_temp": datapoint.amb_temp,
-                        "pipe_temp": datapoint.pipe_temp,
                         "humidity": datapoint.humidity,
-                        "vbatt": datapoint.vbatt,
+                        "light": datapoint.light,
                         "timestamp": str(datapoint.timestamp)
                     })
             data.append({
@@ -277,7 +274,7 @@ class SingleNode:
                 "lat": node.lat,
                 "lon": node.lon,
                 "macaddr": node.macaddr,
-                "well_id": node.well_id,
+                "location": node.location,
                 "datapoints": datapoints,
             })
 
@@ -327,7 +324,7 @@ class SingleNode:
             "lat": data['lat'],
             "lon": data['lon'],
             "macaddr": data['macaddr'],
-            "well_id": data['well_id']
+            "location": data['location']
         }]
 
         '''
@@ -370,7 +367,7 @@ class SingleSite:
                     "lat": node.lat,
                     "lon": node.lon,
                     "macaddr": node.macaddr,
-                    "well_id": node.well_id
+                    "location": node.location
                 })
 
             data.append({
@@ -447,7 +444,9 @@ class Datapoints:
         Add a new datapoint from the Coordinator/Gateway
         '''
         data = json.loads(web.data())
+        data.timestamp = str(datetime.datetime.now())
         new_id = model.new_datapoint(data)
+
         '''
         We don't really care about returning anything to the
         coordinator/gateway, so don't do any kind of returning

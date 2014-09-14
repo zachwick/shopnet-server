@@ -150,7 +150,7 @@ var AppView = Backbone.View.extend({
 
 		// Create the new Node model
 		var newNode = new Node({
-			well_id: this.$("input[name='well_id']").val(),
+			location: this.$("input[name='location']").val(),
 			macaddr: this.$("input[name='macaddr']").val(),
 			site_id: this.$("select[name='site_id']").val()
 		});

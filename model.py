@@ -1,6 +1,6 @@
 import web
 
-db = web.database (dbn="mysql", db="dossier", user="root", passwd="")
+db = web.database (dbn="mysql", db="shopnet", user="shopnet", passwd="shopnet")
 
 ### Site DB/Table Methods
 
@@ -39,7 +39,7 @@ def get_nodes_for_site(site_id):
 def new_node(data):
     new_id = db.insert("Node",
                        macaddr=data['macaddr'],
-                       well_id=data['well_id'],
+                       location=data['location'],
                        lat=data['lat'],
                        lon=data['lon'],
                        site_id=data['site_id'])
@@ -70,29 +70,17 @@ def new_datapoint(data):
     Use var.value rather than var['value']. NR
     '''	
 
-
-    methane  = data['methane']
-    co2      = data['co2']
+    humidity = data['humidity']
     temp     = data['temp']
     pressure = data['pressure']
-    amb_temp = data['amb_temp']
-    pipe_temp = data['pipe_temp']
-    humidity = data['humidity']
-    timestamp = data['timestamp']
-    vbatt = data['vbatt']
+    light    = data['light']
 
     new_id = db.insert ("Datapoint",
                         node_id=node_id,
-                        methane=methane,
-                        co2=co2,
                         temp=temp,
                         pressure=pressure,
-                        amb_temp=amb_temp,
-                        pipe_temp=pipe_temp,
                         humidity=humidity,
-                        vbatt=vbatt,
-                        timestamp=timestamp)
-
+                        light=light)
     return new_id
 
 ### User DB/Table Methods

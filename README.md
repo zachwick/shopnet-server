@@ -1,4 +1,4 @@
-# Dossier Web App
+# shopnet-server Web App
 
 ## Overview:
 At a high level, there are two parts to this web app:
@@ -122,7 +122,7 @@ that is compiled to "straight CSS" by the Grunt 'less' build task. You
 can read more about LESS at http://lesscss.org
 
 ### JavaScript
-The Dossier application uses BackboneJS for a single-page
+The shopnet-server application uses BackboneJS for a single-page
 JS web app that communicates exclusively with the REST API exposed by
 the WebPy application.
 

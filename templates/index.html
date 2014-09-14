@@ -6,15 +6,12 @@
 	<table class="data-table">
 	  <thead>
 		<tr>
-		  <td class="datapoint-wellid">Well</td>
+		  <td class="datapoint-location">Location</td>
 		  <td class="datapoint-timestamp">Timestamp</td>
-		  <td class="datapoint-vbatt">V Batt</td>
-		  <td class="datapoint-timestamp">Temp (F)</td>
-		  <td class="datapoint-ambtemp">Amb Temp (F)</td>
-		  <td class="datapoint-pipetemp">Pipe Temp (F)</td>
+		  <td class="datapoint-temp">Temp (F)</td>
+		  <td class="datapoint-pressure">Pressure</td>
 		  <td class="datapoint-humidity">Humidity (%)</td>
-		  <td class="datapoint-methane">Methane (%)</td>
-		  <td class="datapoint-co2">CO2 (%)</td>
+		  <td class="datapoint-light">Light</td>
 		</tr>
 	  </thead>
 	  <tbody class="data-table-tbody">
@@ -65,8 +62,8 @@
 	<form id="add-node-form">
 	  <input type="text" name="macaddr" class="node-macaddr"
 	  placeholder="MAC Address"></input>
-	  <input type="text" name="well_id" class="node-wellid"
-	  placeholder="Well ID"></input>
+	  <input type="text" name="location" class="node-location"
+	  placeholder="Location"></input>
 	  <select name="site_id" class="add-node-site-select">
 
 	  </select>
@@ -98,20 +95,17 @@
   <span class="node-display">
 	<input type="checkbox" name="node-display">
   </span>
-  <span class="node-id"><%= well_id %></span>
+  <span class="node-id"><%= location %></span>
 </script>
 
 <script type="text/template" id="datapoint-template">
-  <td class="datapoint-wellid"><%= well_id %></td>
+  <td class="datapoint-location"><%= location %></td>
   <td class="datapoint-timestamp"><%= timestamp %></td>
-  <td class="datapoint-vbatt"><%= vbatt %></td>
   <td class="datapoint-temp"><%= temp %></td>
-  <td class="datapoint-ambtemp"><%= amb_temp %></td>
-  <td class="datapoint-pipetemp"><%= pipe_temp %></td>
+  <td class="datapoint-pressure"><%= pressure %></td>
   <td class="datapoint-humidity"><%= humidity %></td>
-  <td class="datapoint-methane"><%= methane %></td>
-  <td class="datapoint-co2"><%= co2 %></td>
+  <td class="datapoint-light"><%= light %></td>
 </script>
 
-<script src="/static/Dossier.js"></script>
+<script src="/static/shopnet-server.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/bootstrap.css" />

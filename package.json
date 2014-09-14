@@ -1,7 +1,7 @@
 {
-	"name":"Dossier",
-	"title": "Dossier Webapp",
-	"description": "A webapp for viewing AMF-Nano WSN data",
+	"name":"shopnet-server",
+	"title": "ShopNet API and Webapp",
+	"description": "A webapp for monitoring and controlling a shop",
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {
