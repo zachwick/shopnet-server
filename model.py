@@ -1,4 +1,5 @@
 import web
+import datetime
 
 db = web.database (dbn="mysql", db="shopnet", user="shopnet", passwd="shopnet")
 
@@ -39,7 +40,7 @@ def get_nodes_for_site(site_id):
 def new_node(data):
     new_id = db.insert("Node",
                        macaddr=data['macaddr'],
-                       location=data['location'],
+                       node_location=data['node_location'],
                        lat=data['lat'],
                        lon=data['lon'],
                        site_id=data['site_id'])
@@ -69,17 +70,19 @@ def new_datapoint(data):
     Each line contains a dictionary that the db has returned.
     Use var.value rather than var['value']. NR
     '''	
+    timestamp = str(datetime.datetime.now())
 
-    humidity = data['humidity']
-    temp     = data['temp']
-    pressure = data['pressure']
-    light    = data['light']
+    humidity = float(data['humidity']) / 10.0
+    temp     = float(data['temp']) / 10.0
+    pressure = float(data['pressure']) / 10.0
+    light    = float(data['light']) / 10.0
 
     new_id = db.insert ("Datapoint",
                         node_id=node_id,
                         temp=temp,
                         pressure=pressure,
                         humidity=humidity,
+                        timestamp=timestamp,
                         light=light)
     return new_id
 

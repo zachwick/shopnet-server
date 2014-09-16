@@ -28,7 +28,7 @@ var Node = Backbone.RelationalModel.extend({
 		id: "",
 		
 		// ID/label that is the location of a particular node
-		location: "",
+		node_location: "",
 
 		// A key to a "Site" object unique identifier
 		site_id: "",

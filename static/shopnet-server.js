@@ -14295,7 +14295,7 @@ var Node = Backbone.RelationalModel.extend({
 		id: "",
 		
 		// ID/label that is the location of a particular node
-		location: "",
+		node_location: "",
 
 		// A key to a "Site" object unique identifier
 		site_id: "",
@@ -14559,7 +14559,7 @@ var AppView = Backbone.View.extend({
 
 		// Create the new Node model
 		var newNode = new Node({
-			location: this.$("input[name='location']").val(),
+			node_location: this.$("input[name='location']").val(),
 			macaddr: this.$("input[name='macaddr']").val(),
 			site_id: this.$("select[name='site_id']").val()
 		});
@@ -14689,7 +14689,7 @@ var DatapointView = Backbone.View.extend({
 
 	// Create and manipulate the DOM to create and display the DatapointView.
 	render: function() {
-		this.$el.html (this.template()(_.extend(this.model.toJSON(),{ well_id: (this.model.get("node_id")).get("well_id")})));
+		this.$el.html (this.template()(_.extend(this.model.toJSON(),{ node_location: (this.model.get("node_id")).get("node_location")})));
 		return this;
 	}
 });

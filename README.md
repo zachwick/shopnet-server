@@ -139,3 +139,7 @@ The python server-side app has code comments in its source files, but
 no external documentation. If you read this README from the top, you
 should already have encountered how the whole thing works at a high
 level. 
+
+## Testing
+The following curl command tests the /datapoints/ endpoint:
+curl --http1.1 192.168.1.100/datapoints/ --header "Content-Type: application/json" --data "{\"macaddr\":\"90A2DA0F4BD0\",\"temp\":\"711\",\"humidity\":\"441\",\"pressure\":\"16317\",\"light\":\"13\"}"

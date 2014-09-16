@@ -12,7 +12,6 @@ import model
 import json
 import csv
 import hashlib
-import datetime
 
 '''
  If web.config.debug is not explicitly set to False, sessions with not work.
@@ -220,7 +219,7 @@ class Nodes:
         new_id = model.new_node(data)
         data = [{
             "macaddr": data['macaddr'],
-            "location": data['location'],
+            "node_location": data['node_location'],
             "site_id": data['site_id'],
             "id": new_id,
             "lat": data['lat'],
@@ -274,7 +273,7 @@ class SingleNode:
                 "lat": node.lat,
                 "lon": node.lon,
                 "macaddr": node.macaddr,
-                "location": node.location,
+                "node_location": node.node_location,
                 "datapoints": datapoints,
             })
 
@@ -324,7 +323,7 @@ class SingleNode:
             "lat": data['lat'],
             "lon": data['lon'],
             "macaddr": data['macaddr'],
-            "location": data['location']
+            "node_location": data['node_location']
         }]
 
         '''
@@ -367,7 +366,7 @@ class SingleSite:
                     "lat": node.lat,
                     "lon": node.lon,
                     "macaddr": node.macaddr,
-                    "location": node.location
+                    "node_location": node.node_location
                 })
 
             data.append({
@@ -441,10 +440,19 @@ class Sites:
 class Datapoints:
     def POST(self):
         '''
-        Add a new datapoint from the Coordinator/Gateway
+        Add a new datapoint from the weathernode
+
+        The expected format is:
+        {
+           "macaddr": DEADBEEFFEED,
+           "temp": XX.X,
+           "humidity": XX.X,
+           "pressure": XX.X,
+           "light": XXX
+        }
         '''
+        print web.data()
         data = json.loads(web.data())
-        data.timestamp = str(datetime.datetime.now())
         new_id = model.new_datapoint(data)
 
         '''

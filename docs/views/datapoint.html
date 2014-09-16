@@ -228,7 +228,7 @@ jQuery’s ‘remove’ method.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>	render: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-		<span class="hljs-keyword">this</span>.$el.html (<span class="hljs-keyword">this</span>.template()(_.extend(<span class="hljs-keyword">this</span>.model.toJSON(),{ well_id: (<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">"node_id"</span>)).get(<span class="hljs-string">"well_id"</span>)})));
+		<span class="hljs-keyword">this</span>.$el.html (<span class="hljs-keyword">this</span>.template()(_.extend(<span class="hljs-keyword">this</span>.model.toJSON(),{ node_location: (<span class="hljs-keyword">this</span>.model.get(<span class="hljs-string">"node_id"</span>)).get(<span class="hljs-string">"node_location"</span>)})));
 		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 	}
 });</pre></div></div>

@@ -45,7 +45,7 @@ var DatapointView = Backbone.View.extend({
 
 	// Create and manipulate the DOM to create and display the DatapointView.
 	render: function() {
-		this.$el.html (this.template()(_.extend(this.model.toJSON(),{ well_id: (this.model.get("node_id")).get("well_id")})));
+		this.$el.html (this.template()(_.extend(this.model.toJSON(),{ node_location: (this.model.get("node_id")).get("node_location")})));
 		return this;
 	}
 });
