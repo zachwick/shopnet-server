@@ -89,8 +89,14 @@
 	<span class="save <%- editing ? 'state-visible' : 'state-hidden' %>">Save</span>
   </div>
   <div class="site-info <%- display ? 'state-visible' : 'state-hidden' %>">
-	<span class="site-temp-sp-label">Temp. Set Point: </span>
-	<span class="site-temp-sp" contenteditable="<%- editing %>"><%= temp_sp %></span>
+	<div class="site-temp-sp-container">
+	  <span class="site-temp-sp-label">Temp Set Point: </span>
+	  <span class="site-temp-sp" contenteditable="<%- editing %>"><%= temp_sp %></span>
+	</div>
+	<div class="site-temp-avg-container">
+	  <span class="site-temp-avg-label">Average Temp: </span>
+	  <span class="site-temp-avg"><%= temp_avg %></span>
+	</div>
   </div>
   <ul class="site-nodes <%- display ? 'state-visible' :
   'state-hidden' %>">
