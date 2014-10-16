@@ -37,6 +37,50 @@ def update_site(data):
 def delete_site(id):
     db.delete("Site", where="id=$id", vars=locals())
 
+def update_site_temp_avg(data):
+    '''
+    `data` is a Datapoint JSON representation from a weathernode Arduino
+    We need to:
+       1. determine which `node` this datapoint belongs to
+       2. determine which `site` this datapoint's node belongs to
+       3. fetch the latest temp from each node in that site
+       4. calculate the average temperature across all nodes for the site
+       5. set that avgerage temp as the site's temp_avg1
+    '''
+    # 1. Determine which `node` this datapoint belongs to
+    # 2. Determine which `site` this `node` belongs to
+    macaddr  = data['macaddr']
+    '''
+    Get the node that corresponds to the given macaddr
+    This returns a list/array, but there should only be a single node
+    '''
+    node_list  = db.select ("Node", where="macaddr=$macaddr",vars=locals())
+    for node in node_list:
+        site_id = node.site_id
+    
+    # 3. Fetch the latest temp from each node in that site
+    '''
+    Get all of the nodes that belong to the site given by site_id above
+    '''
+    temp_sum = 0
+    latest_datapoints = []
+    node_list = db.select ("Node", where="site_id=$site_id", vars=locals())
+    for node in node_list:
+        datapoints = db.select("Datapoint", where="node_id=$node_id", order="id DESC", limit="1", vars=locals())
+        for datapoint in datapoints:
+            latest_datapoints.append(datapoint)
+    for datapoint in latest_datapoints:
+        temp_sum += datapoint.temp
+        
+    new_temp_avg = float(temp_sum / (len(latest_datapoints) * 1.0))
+
+    update_success = db.update ("Site", where="id=$site_id", temp_avg = new_temp_avg, vars=locals())
+    
+    if update_success == 1:
+        return True
+    else:
+        return False
+    
 ### Node DB/Table Methods
 
 def get_nodes():

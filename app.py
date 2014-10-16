@@ -374,6 +374,7 @@ class SingleSite:
                 "id":   site.id,
                 "name": site.name,
                 "temp_sp": site.temp_sp,
+                "temp_avg": site.temp_avg,
                 "nodes": nodes
             })
 
@@ -423,7 +424,8 @@ class Sites:
             data.append({
                 "id": site.id,
                 "name": site.name,
-                "temp_sp": site.temp_sp
+                "temp_sp": site.temp_sp,
+                "temp_avg": site.temp_avg 
             })
 
         web.header("Content-Type", "application/json")
@@ -435,8 +437,8 @@ class Sites:
         Add a new site
         '''
         data = json.loads(web.data())
-        #data['user_id'] = session.id
         new_id = model.new_site(data)
+
         data = [{
             "id": new_id,
             "name": str(data['name']),
@@ -464,6 +466,12 @@ class Datapoints:
         print web.data()
         data = json.loads(web.data())
         new_id = model.new_datapoint(data)
+
+        '''
+        We have a new datapoint so, update the site.temp_avg for the site that
+        this datapoint's node belongs to.
+        '''
+        updated_success = model.update_site_temp_avg(data)
 
         '''
         We don't really care about returning anything to the
