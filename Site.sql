@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `Site`
 --
-
+DROP TABLE `Site`;
 CREATE TABLE IF NOT EXISTS `Site` (
 `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,

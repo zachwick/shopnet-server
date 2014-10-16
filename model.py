@@ -66,11 +66,12 @@ def update_site_temp_avg(data):
     latest_datapoints = []
     node_list = db.select ("Node", where="site_id=$site_id", vars=locals())
     for node in node_list:
-        datapoints = db.select("Datapoint", where="node_id=$node_id", order="id DESC", limit="1", vars=locals())
+        datapoints = db.select("Datapoint", where="node_id=$node['id']", order="id DESC", limit="1", vars=locals())
         for datapoint in datapoints:
             latest_datapoints.append(datapoint)
     for datapoint in latest_datapoints:
         temp_sum += datapoint.temp
+	print datapoint.temp
         
     new_temp_avg = float(temp_sum / (len(latest_datapoints) * 1.0))
 
