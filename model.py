@@ -1,7 +1,7 @@
 import web
 import datetime
 
-db = web.database (dbn="mysql", db="shopnet", user="shopnet", passwd="shopnet")
+db = web.database (dbn="mysql", db="shopnet", user="root", passwd="Fritz")
 
 ### Site DB/Table Methods
 
