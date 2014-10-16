@@ -53,6 +53,7 @@
 		<% } else { %>
 		   <input type="hidden" name="user_id" value="<%= user_id %>"></input>
 		<% } %>
+		<input type="text" name="temp_sp" placeholder="Temp Set Point"></input>
 		<input type="submit" value="Add New Site"></input>
 	  </form>
   </div>
@@ -81,10 +82,15 @@
 </script>
 
 <script type="text/template" id="site-template">
-  <span class="site-name"><%= name %></span>
+  <span class="site-name" contenteditable="<%- editing %>"><%= name %></span>
   <div class="site-actions <%- display ? 'state-visible' : 'state-hidden' %>">
 	<span class="delete">Delete</span>
-	<span class="edit">Edit</span>
+	<span class="edit <%- editing ? 'state-hidden' : 'state-visible' %>">Edit</span>
+	<span class="save <%- editing ? 'state-visible' : 'state-hidden' %>">Save</span>
+  </div>
+  <div class="site-info <%- display ? 'state-visible' : 'state-hidden' %>">
+	<span class="site-temp-sp-label">Temp. Set Point: </span>
+	<span class="site-temp-sp" contenteditable="<%- editing %>"><%= temp_sp %></span>
   </div>
   <ul class="site-nodes <%- display ? 'state-visible' :
   'state-hidden' %>">

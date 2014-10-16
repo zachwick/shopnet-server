@@ -373,6 +373,7 @@ class SingleSite:
                 # TODO: add other site values here
                 "id":   site.id,
                 "name": site.name,
+                "temp_sp": site.temp_sp,
                 "nodes": nodes
             })
 
@@ -386,9 +387,16 @@ class SingleSite:
 
     def PUT(self, id):
         '''
-        Update an existing site. This functionality needs implemented
+        Update an existing site.
         '''
-
+        data = json.loads(web.data())
+        
+        update_success = model.update_site(data)
+        if update_success:
+            web.header("Content-Type", "application/json")
+            web.header("Cache-Control", "no-cache")
+            return json.dumps(data)
+        
     def DELETE(self, id):
         '''
         Hitting this method removes the related site record from the database.
@@ -414,7 +422,8 @@ class Sites:
         for site in self.sites:
             data.append({
                 "id": site.id,
-                "name": site.name
+                "name": site.name,
+                "temp_sp": site.temp_sp
             })
 
         web.header("Content-Type", "application/json")
@@ -430,7 +439,8 @@ class Sites:
         new_id = model.new_site(data)
         data = [{
             "id": new_id,
-            "name": str(data['name'])
+            "name": str(data['name']),
+            "temp_sp": float(data['temp_sp'])
         }]
 
         web.header("Content-Type", "application/json")

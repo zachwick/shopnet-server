@@ -23,6 +23,17 @@ def new_site(data):
                        user_id=user_id)
     return new_id
 
+def update_site(data):
+    new_name = data['name']
+    new_temp_sp = data['temp_sp']
+
+    sites = db.update("Site", where="id=$data['id']", name = new_name, temp_sp = new_temp_sp, vars=locals())
+    
+    if sites == 1:
+        return True
+    else:
+        return False
+
 def delete_site(id):
     db.delete("Site", where="id=$id", vars=locals())
 

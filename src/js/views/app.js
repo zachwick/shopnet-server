@@ -173,6 +173,7 @@ var AppView = Backbone.View.extend({
 
 		var newSite = new Site({
 			name: this.$("input[name='name']").val(),
+			temp_sp: this.$("input[name='temp_sp']").val(),
 			user_id: user_id
 		});
 

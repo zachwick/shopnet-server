@@ -23,9 +23,10 @@ var SiteView = Backbone.View.extend({
 	// NB: The toggleEditingState function is not implemented, so there is
 	//     currently no way to edit a site except via the database.
 	events: {
-		'click span:not(.delete):not(.edit):not(.not-name):not(.node-display)': 'toggleDisplaySite',
+		'click span:not(.delete):not(.edit):not(.save):not(.not-name):not(.node-display)': 'toggleDisplaySite',
 		'click .delete': 'deleteSelf',
-		'click .edit': 'toggleEditingState'
+		'click .edit': 'toggleEditingState',
+		'click .save': 'saveSelf'
 	},
 
 	// This method calls the REST API DELETE method which surprisingly,
@@ -36,12 +37,33 @@ var SiteView = Backbone.View.extend({
 		this.model.destroy();
 	},
 
+	// This method is called when the user clicks on the site's 'Save' button
+	// It unsets the 'contenteditable' property, and calls model.save()
+	saveSelf: function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		console.log(this.$(".site-name").html());
+		console.log(this.$(".site-temp-sp").html());
+		this.model.set({
+			name: this.$(".site-name").html(),
+			temp_sp: this.$(".site-temp-sp").html(),
+			editing: false
+		});
+		console.log(this.model.attributes);
+		this.model.save();
+	},
+
 	// This is not yet implemented, but the idea is to change all of the
 	// site information fields into inputs and
 	// add a save button that calls this.model.save() when clicked. This means
 	// that a new event binding needs to be added for this view.
 	toggleEditingState: function(e) {
-
+		// If not currently editing, set model.editing to true
+		// This causes the CSS to kick in which hides the "Edit" button
+		// and shows the "Save" button
+		if (!this.model.get("editing")) {
+			this.model.set({ editing: true });
+		}
 	},
 
 	// This method opens and closes the row corresponding to this site in the
@@ -57,9 +79,12 @@ var SiteView = Backbone.View.extend({
 	toggleDisplaySite: function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		this.model.set({ display: !this.model.get("display") });
-		if (this.model.get("display")) {
-			this.model.fetch();
+		// Don't close the site if it is currently being edited
+		if (!this.model.get("editing")) {
+			this.model.set({ display: !this.model.get("display") });
+			if (this.model.get("display")) {
+				this.model.fetch();
+			}
 		}
 	},
 

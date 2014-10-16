@@ -26,7 +26,9 @@ var Site = Backbone.RelationalModel.extend({
 	defaults: {
 		// Name of the site
 		name: "",
-		display: false
+		display: false,
+		editing: false,
+		temp_sp: 0.00
 	},
 	
 	// A URI fragment that corresponds to the REST API's URL for the Site data

@@ -22,6 +22,12 @@
   right: 5px;
   top: 0px;
 }
+#site-list li.state-expanded .site-actions .edit.state-hidden {
+  display: none;
+}
+#site-list li.state-expanded .site-actions .save.state-hidden {
+  display: none;
+}
 #site-list li .site-actions span {
   cursor: pointer;
   border: 1px solid black;
