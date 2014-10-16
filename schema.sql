@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2014 at 09:59 AM
+-- Generation Time: Oct 16, 2014 at 03:06 PM
 -- Server version: 5.5.39-MariaDB-2
 -- PHP Version: 5.6.0-1+b1
 
@@ -92,15 +92,16 @@ INSERT INTO `Node` (`id`, `lat`, `lon`, `site_id`, `macaddr`, `node_location`) V
 CREATE TABLE IF NOT EXISTS `Site` (
 `id` int(10) unsigned NOT NULL,
   `name` varchar(50) NOT NULL,
-  `user_id` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+  `user_id` int(10) unsigned NOT NULL,
+  `temp_sp` float NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Site`
 --
 
-INSERT INTO `Site` (`id`, `name`, `user_id`) VALUES
-(8, 'Wick Shop', 1);
+INSERT INTO `Site` (`id`, `name`, `user_id`, `temp_sp`) VALUES
+(8, 'zwick shop', 1, 10.7);
 
 -- --------------------------------------------------------
 
@@ -169,7 +170,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 -- AUTO_INCREMENT for table `Site`
 --
 ALTER TABLE `Site`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `User`
 --
