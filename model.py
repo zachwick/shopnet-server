@@ -63,10 +63,10 @@ def delete_node(id):
 ### Datapoint DB/Table Methods
 
 def get_datapoints():
-    return db.select ("Datapoint", order="id")
+    return db.select ("Datapoint", order="id DESC")
 
 def get_datapoints_for_node(node_id):
-    return db.select ("Datapoint", where="node_id=$node_id", vars=locals())
+    return db.select ("Datapoint", where="node_id=$node_id", order="id DESC", vars=locals())
 
 def new_datapoint(data):
     macaddr  = data['macaddr']
