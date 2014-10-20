@@ -236,9 +236,16 @@ class SingleNode:
         '''
         GET all of the data about a single particular WSN node
         '''
-        self.nodes = model.get_node(id)
-        self.datapoints = model.get_datapoints_for_node(id)
         data = []
+        self.nodes = model.get_node(id)
+
+        '''
+        As it turns out, fetching a couple thousand records from a db running
+        on a Raspberry Pi is really really really slow.
+        So, lets initially fetch only a few of the records and paginate the rest
+        '''
+        #self.datapoints = model.get_datapoints_for_node(id)
+        self.datapoints = model.get_abbrev_datapoints_for_node(id)
 
         '''
         This for loop first constructs all of the Datapoint data packets.

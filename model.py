@@ -111,7 +111,12 @@ def get_datapoints():
     return db.select ("Datapoint", order="id DESC")
 
 def get_datapoints_for_node(node_id):
-    return db.select ("Datapoint", where="node_id=$node_id", order="id DESC", vars=locals())
+    return db.select ("Datapoint", where="node_id=$node_id", order="id DESC",
+                      vars=locals())
+
+def get_abbrev_datapoints_for_node(node_id):
+    return db.select ("Datapoint", where="node_id=$node_id", order="id DESC",
+                      limit="100", vars=locals())
 
 def new_datapoint(data):
     macaddr  = data['macaddr']
